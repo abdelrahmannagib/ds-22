@@ -1,10 +1,11 @@
-#pragma once
+﻿#pragma once
 #include<string>
 using namespace std;
 class service
 { public:
-	int ID;
+	int Id;
+	static int counter;
 	string name;
-	double price;
+	double price; ‏
 };
 
