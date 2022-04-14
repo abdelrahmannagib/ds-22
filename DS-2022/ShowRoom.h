@@ -1,31 +1,24 @@
 #pragma once
-//#include <string>
-#include <vector>
-//template <class T>
-
+#include<iostream>
+using namespace std;
 class Showroom
 {
-	
 public:
+	int ID;
+	string Garage_name;
+	string location;
+	string phoneNumber;
 
-	
-	
-		int ID ;
-		string Garage_name ;
-		string location ;
-		string phoneNumber ;
-
-		//vector <Cars> Rooms;
+	//vector <Cars> Rooms;
 
 
 	Showroom();
-	void ShowRoomEdit();
+/*	void ShowRoomEdit();
 	void AddShowRoom();
 	void AddCar();
 	void RemoveCAr();
 	~Showroom();
-	
-	
+	*/
 
 };
 
