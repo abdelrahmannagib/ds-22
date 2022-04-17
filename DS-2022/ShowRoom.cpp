@@ -2,34 +2,39 @@
 #include <iostream>
 using namespace std;
 
-
-//template<class T>
+int Showroom::RoomId=1;
 Showroom::Showroom()
 {
-	cout << "enter id:";
-	cin >> ID;
-	cout << "enter location :";
-	cin >> Garage_name;
-
-
+	ID = RoomId;
+	RoomId++;
+	cout << "Enter Room Name : ";
+	cin >> Name;
+	cout << "Enter Room Location : ";
+	cin >> Location;
+	cout << "Enter Room Phone Number : ";
+	cin >> Phone;
+}
+void Showroom::AddRoom() {
+	Showroom::Showroom();
+}
+void Showroom::UpdateRoomName() {
+	cout << "Enter the new Name : ";
+	cin >> Name;
+}
+void Showroom::UpdateRoomLocation() {
+	cout << "Enter the new Location : ";
+	cin >> Location;
+}
+void Showroom::UpdateRoomPhone() {
+	cout << "Enter the new Phone : ";
+	cin >> Phone;
+}
+void Showroom::AddCar() {
+	 car::car(void);
+}
+void Showroom::UpadateCar() {
+	void car::Edit();
 }
 
-//template<class T>
-void Showroom::ShowRoomEdit()
-{
-	
- 
-	
-}
 
-//template<class T>
-void Showroom::AddCar()
-{
-	
-}
 
-//template<class T>
-void Showroom::RemoveCAr()
-{
-	
-}
