@@ -2,7 +2,8 @@
 #include <iostream>
 using namespace std;
 
-int Showroom::RoomId=1;
+
+
 Showroom::Showroom()
 {
 	ID = RoomId;
@@ -30,11 +31,9 @@ void Showroom::UpdateRoomPhone() {
 	cin >> Phone;
 }
 void Showroom::AddCar() {
-	 car::car(void);
+	car();
 }
 void Showroom::UpadateCar() {
-	void car::Edit();
+	
+	
 }
-
-
-
