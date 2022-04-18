@@ -1,6 +1,8 @@
 #include "System.h"
 
 System::System() {
+	/// we could make a loop to ask again?
+	
 	int n;
 	cout << "enter 1 to creat room , press 2 to creat garage : ";
 	cin >> n;
