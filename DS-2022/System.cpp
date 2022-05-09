@@ -1,8 +1,10 @@
 #include "System.h"
-
+#include<fstream>
+#include<string>
 System::System() {
 	/// we could make a loop to ask again?
-	
+	insert_rooms_of_garage_to_file();
+	//cout<<sysRoom[0].Name;
 	int n;
 	cout << "enter 1 to creat room , press 2 to creat garage : ";
 	cin >> n;
@@ -20,7 +22,7 @@ System::System() {
 		cout << "ERROR!" << endl;
 		//break from the loop
 	}
-	sysRoom[0].AddCar();
+	/*sysRoom[0].AddCar();
 	cout << "Enter 1 for admin or 2 for customer"<<endl;
 	cin >> n;
 	if (n == 1)
@@ -31,6 +33,8 @@ System::System() {
 	{
 		goto_customer();
 	}
+	*/
+
 }
 void System::goto_customer()
 {
@@ -128,5 +132,23 @@ void System::goto_Garage() {
 		cout << "Name :" << sysGarage[i].name << endl;
 		cout << "Phone :" << sysGarage[i].phone_number << endl;
 
+	}
+}
+// from file to vector
+void System::insert_rooms_of_garage_to_file() {
+
+	fstream sroom;
+	char car_id[70];
+	char name[70];
+	char location[70];
+	char phone[70];
+	sroom.open("showroom.txt", ios::in);
+	while (!sroom.eof()) {
+		sroom.getline(car_id, 70, ' ');
+		sroom.getline(name, 70, ' ');
+		sroom.getline(location, 70, ' ');
+		sroom.getline(phone, 70, ' ');
+		Showroom sss(name,location,phone);
+		sysRoom.push_back(sss);
 	}
 }

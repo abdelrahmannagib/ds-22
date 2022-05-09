@@ -19,5 +19,6 @@ public:
 	void goto_customer();
 	void goto_Admin();
 	void goto_Garage();
+	void insert_rooms_of_garage_to_file();
 };
 

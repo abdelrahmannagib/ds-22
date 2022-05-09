@@ -4,7 +4,7 @@
 #include"car.h"
 using namespace std;
 class Showroom
-{
+{	
 public:
 	static int RoomId;
 	int ID;
@@ -15,10 +15,11 @@ public:
 	vector <car> AvalibleCAr;
 
 	Showroom();
+	Showroom(string s1, string s2, string s3);
 	void UpdateRoomName();
 	void UpdateRoomLocation();
 	void UpdateRoomPhone();
-	void AddRoom();
+//	void AddRoom();
 	void AddCar();
 	void UpadateCar();
 
