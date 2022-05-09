@@ -1,9 +1,9 @@
 #include "ShowRoom.h"
 #include <iostream>
+#include<fstream>
 using namespace std;
 
-
-
+int Showroom::RoomId = 1;
 Showroom::Showroom()
 {
 	ID = RoomId;
@@ -14,9 +14,17 @@ Showroom::Showroom()
 	cin >> Location;
 	cout << "Enter Room Phone Number : ";
 	cin >> Phone;
+	fstream sroom;
+	sroom.open("showroom.txt", ios::app);
+	sroom << ID << " " << Name << " " << Location << " " << Phone << endl;
 }
-void Showroom::AddRoom() {
-	Showroom::Showroom();
+Showroom::Showroom(string s1,string s2,string s3)
+{
+	ID = RoomId;
+	RoomId++;
+	Name = s1;
+	Location = s2;
+	Phone = s3;
 }
 void Showroom::UpdateRoomName() {
 	cout << "Enter the new Name : ";
@@ -31,9 +39,10 @@ void Showroom::UpdateRoomPhone() {
 	cin >> Phone;
 }
 void Showroom::AddCar() {
-	car();
+	car c;
+	AvalibleCAr.push_back(c);
 }
 void Showroom::UpadateCar() {
-	
+	//car::Edit;
 	
 }

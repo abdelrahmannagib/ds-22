@@ -9,8 +9,6 @@ car::car(void)
 {
 	id = counter;
 	counter++;
-	
-
 	cout << "Enter the make : \n";
 	cin >> make;
 	cout << "Enter the model \n";
@@ -19,7 +17,6 @@ car::car(void)
 	cin >> install;
 	cout << "Enter the year \n";
 	cin >> year;
-	cout << "Enter the price \n";
 	edit_price();
 }
 
