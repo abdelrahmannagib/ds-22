@@ -20,5 +20,6 @@ public:
 	void goto_Admin();
 	void goto_Garage();
 	void insert_rooms_of_garage_to_file();
+	void insert_admins_from_files();
 };
 
