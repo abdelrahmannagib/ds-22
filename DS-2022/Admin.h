@@ -4,6 +4,7 @@ using namespace std;
 
 class Admin
 {
+public:
 	int Id;
 	static int counter;
 	string Username;
@@ -11,4 +12,5 @@ class Admin
 
 public:
 	Admin();
+	Admin(string s1,string s2);
 };
