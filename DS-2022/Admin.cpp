@@ -26,5 +26,4 @@ Admin::Admin(string s1, string s2)
 	counter++;
 	Username = s1;
 	Password = s2;
-	cout << s1 << " "<<s2 << endl;;
 }
