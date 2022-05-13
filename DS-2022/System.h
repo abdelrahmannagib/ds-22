@@ -21,5 +21,9 @@ public:
 	void goto_Garage();
 	void insert_rooms_of_garage_to_file();
 	void insert_admins_from_files();
+	void insert_cars_from_files();
+	void insert_services_from_files();
+	void insert_customer_from_files();
+	void insert_process_from_file();
 };
 

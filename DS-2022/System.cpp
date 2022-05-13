@@ -209,7 +209,87 @@ void System::insert_admins_from_files()
 		fadmin.getline(fadmin_id, 70, ' ');
 		fadmin.getline(fusername, 70, ' ');
 		fadmin.getline(fpassword, 70);
+		// ------------
 		Admin aa(fusername, fpassword);
 		sysAdmin.push_back(aa);
 	}
+}
+// to be edited 
+void System::insert_cars_from_files()
+{
+	fstream fcars;
+	char fcar_id[70];
+	char fcar_make[70];
+	char fcar_model[70];
+	char fcar_year[70];
+	char fcar_price[70];
+	char fcar_instt[70];
+	fcars.open("cars.text", ios::in);
+	while (!fcars.eof())
+	{
+		fcars.getline(fcar_id, 70, ' ');
+		fcars.getline(fcar_make, 70, ' ');
+		fcars.getline(fcar_model, 70, ' ');
+		fcars.getline(fcar_year, 70, ' ');
+		fcars.getline(fcar_price, 70, ' ');
+		fcars.getline(fcar_instt, 70, ' ');
+
+	}
+}
+void System::insert_services_from_files()
+{
+	fstream fservice;
+	char fservice_id[70];
+	char fservice_name[70];
+	char fservice_price[70];
+	fservice.open("service.txt", ios::in);
+	while (!fservice.eof())
+	{
+		fservice.getline(fservice_id, 70, ' ');
+		fservice.getline(fservice_name, 70, ' ');
+		fservice.getline(fservice_price, 70);
+
+
+	}
+}
+void System::insert_customer_from_files()
+{
+	fstream customerf;
+	char customer_id[70];
+	char customer_username[70];
+	char customer_pass[70];
+	customerf.open("customer.txt", ios::in);
+	while (!customerf.eof())
+	{
+		customerf.getline(customer_id, 70, ' ');
+		customerf.getline(customer_username, 70, ' ');
+		customerf.getline(customer_pass, 70);
+		
+	}
+}
+void System::insert_process_from_file()
+{
+	fstream fprocess;
+	char fprocess_id[70];
+	char fcar_id[70];
+	char fdate[70];
+	char fmoney[70];
+	char fchosen_service[70];
+	fprocess.open("process.txt", ios::in);
+	while (!fprocess.eof())
+	{
+
+		fprocess.getline(fprocess_id, 70, ' ');
+		fprocess.getline(fcar_id, 70, ' ');
+		fprocess.getline(fdate, 70, ' ');
+		fprocess.getline(fmoney, 70, ' ');
+		fprocess.getline(fchosen_service, 70);
+
+
+
+
+	}
+
+
+
 }
