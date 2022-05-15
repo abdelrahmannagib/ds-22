@@ -13,7 +13,8 @@ public :
 	double price;
 	double install;
 
-	car();
+	car(string g);
+	car(string ma, string mo, string ins, string year, string pr);
 	~car();
     void edit_price();
 	void edit_install();

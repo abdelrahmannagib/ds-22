@@ -10,5 +10,9 @@ public:
 	string location;
 	string phone_number;
 	garage();
+	void edit_garage();
+	void edit_name();
+	void edit_location();
+	void edit_phone();
 };
 

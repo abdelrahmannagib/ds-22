@@ -169,13 +169,42 @@ void System::goto_Admin() {
 }
 
 void System::goto_Garage() {
-	for (int i = 0; i < sysGarage.size(); i++)
+	bool garage_flag;
+	while (garage_flag == true)
 	{
-		cout << "======Garage info======" << endl;
-		cout << "ID :" << sysGarage[i].id << endl;
-		cout << "Location :" << sysGarage[i].location << endl;
-		cout << "Name :" << sysGarage[i].name << endl;
-		cout << "Phone :" << sysGarage[i].phone_number << endl;
+		cout << "enter 1 to add garage" << endl;
+		cout << "enter 2 to edit garage" << endl;
+		cout << "enter 3 if you want to exit";
+		int y;
+		cin >> y;
+		if (y == 1) {
+			garage g;
+			sysGarage.push_back(g);
+		}
+		else if (y == 2) {
+			for (int i = 0; i < sysGarage.size(); i++)
+			{
+				char choice;
+				cout << "======Garage info======" << endl;
+				cout << "ID :" << sysGarage[i].id << endl;
+				cout << "Location :" << sysGarage[i].location << endl;
+				cout << "Name :" << sysGarage[i].name << endl;
+				cout << "Phone :" << sysGarage[i].phone_number << endl;
+				cout << "if do you want to edit it press x ";
+				cin >> choice;
+				if (choice == 'x' || choice == 'X')
+				{
+					sysGarage[i].edit_garage();
+				}
+			}
+		}
+		else if (y== 3)
+		{
+			garage_flag = false;
+		}
+		else {
+			cout << "enter correct number";
+		}
 
 	}
 }
@@ -224,16 +253,28 @@ void System::insert_cars_from_files()
 	char fcar_year[70];
 	char fcar_price[70];
 	char fcar_instt[70];
+	char fcar_g[70];
+	int gar;
 	fcars.open("cars.text", ios::in);
 	while (!fcars.eof())
 	{
 		fcars.getline(fcar_id, 70, ' ');
 		fcars.getline(fcar_make, 70, ' ');
 		fcars.getline(fcar_model, 70, ' ');
+		fcars.getline(fcar_instt, 70, ' ');
 		fcars.getline(fcar_year, 70, ' ');
 		fcars.getline(fcar_price, 70, ' ');
-		fcars.getline(fcar_instt, 70, ' ');
-
+		fcars.getline(fcar_g, 70, ' ');
+		gar = stoi(fcar_g);
+		fstream fcars;
+		for (int i = 0; i < sysRoom.size(); i++)
+		{
+			if (sysRoom[i].ID == gar)
+			{
+				sysRoom[i].AddCar();
+				break;
+			}
+		}
 	}
 }
 void System::insert_services_from_files()
@@ -248,8 +289,8 @@ void System::insert_services_from_files()
 		fservice.getline(fservice_id, 70, ' ');
 		fservice.getline(fservice_name, 70, ' ');
 		fservice.getline(fservice_price, 70);
-
-
+		service service(fservice_name, fservice_price);
+		sysService.push_back(service);
 	}
 }
 void System::insert_customer_from_files()
@@ -264,7 +305,8 @@ void System::insert_customer_from_files()
 		customerf.getline(customer_id, 70, ' ');
 		customerf.getline(customer_username, 70, ' ');
 		customerf.getline(customer_pass, 70);
-		
+		customer customer(customer_username, customer_pass);
+		syscustomers.push_back(customer);
 	}
 }
 void System::insert_process_from_file()

@@ -5,7 +5,14 @@ service::service()
 	Id = counter;
 	counter++;
 }
+service::service(string Name, string Price)
+{
+	Id = counter;
+	counter++;
 
+	name = Name;
+	price = Price;
+}
 service::~service()
 {
 }

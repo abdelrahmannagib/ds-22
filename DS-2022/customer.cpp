@@ -12,4 +12,11 @@ customer::customer() {
 	ID = counter;
 	counter++;
 }
+customer::customer(string user, string pass)
+{
+	ID = counter;
+	counter++;
+	username = user;
+	password = pass;
+}
 
