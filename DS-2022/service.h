@@ -11,6 +11,7 @@ class service
 	double price;
 public:
 	service();
+	service(string Name, string Price);
 	~service();
 	void Edit(double price);
 };

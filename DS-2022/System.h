@@ -6,6 +6,7 @@
 #include"buy_rent.h"
 #include"Admin.h"
 #include"garage.h"
+#include"service.h"
 using namespace std;
 class System
 {
@@ -15,6 +16,7 @@ public:
 	vector<customer> syscustomers;
 	vector<Admin> sysAdmin;
 	vector<garage> sysGarage;
+	vector<service> sysService;
 	System();
 	void goto_customer();
 	void goto_Admin();

@@ -9,5 +9,6 @@ public:
 	string username;
 	string pass;
 	customer();
+	customer(string user, string pass);
 };
 
