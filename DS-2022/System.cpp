@@ -82,45 +82,47 @@ void System::goto_customer()
 		cout << "That's all cars we have" << endl;
 	}
 }
+
 void System::goto_Admin() {
 	int n;
 	string user;
-	cout << "New Admin press (1) , press (2) if your old : ";
-	cin >> n;
-	if (n == 1) {
-		Admin A;
-		sysAdmin.push_back(A);
-	}
-	else if (n == 2)
+	while (true)
 	{
-		bool found_admin = false;
-		cin >> user;
-		for (int i = 0; i < sysAdmin.size(); i++)
+		cout << "New Admin press 1 or press 2 for old admin : \n ";
+		cin >> n;
+		if (n == 1) {
+			Admin A;
+			sysAdmin.push_back(A);
+		}
+		else if (n == 2)
 		{
-			if (sysAdmin[i].Username == user)
+			bool admin_found = false;
+			cin >> user;
+			for (int i = 0; i < sysAdmin.size(); i++)
 			{
-				string pass;
-				cout << "Enter your pass" << endl;
-				cin >> pass;
-				if (sysAdmin[i].Password == pass)
-					found_admin = true;
-				else
+				if (sysAdmin[i].Username == user)
 				{
-					cout << "Wrong pass please try again"<<endl;
-					i = -1;
+					string pass;
+					cout << "Enter your pass" << endl;
+					cin >> pass;
+					if (sysAdmin[i].Password == pass)
+					{
+						admin_found = true;
+					}
+
+
+					else
+					{
+						cout << "Wrong pass please try again" << endl;
+						i = -1;
+
+					}
 				}
 			}
+
+
 		}
-		if (!found_admin)
-		{
-			cout << "User not found Try again" << endl;
-			goto_Admin();
-		}
-	
-	}
-	else
-	{
-		cout << "ERROR!" << endl;
+
 	}
 	int x;
 	cout << "Welcome " << user << " press 1 for showrooms or 2 for garage" << endl;
@@ -165,7 +167,7 @@ void System::goto_Admin() {
 	{
 		cout << "ERROR!" << endl;
 	}
-	
+
 }
 
 void System::goto_Garage() {
