@@ -29,10 +29,9 @@ car::car(string ma, string mo, string ins, string ye, string pr)
 	counter++;
 	make = ma;
 	model = mo;
-	install = stoi(ins);
+	install = ins;
 	year = ye;
-	price = stoi(pr);
-
+	price = pr;
 }
  void car::edit_price()
 {

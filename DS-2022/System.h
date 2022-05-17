@@ -1,6 +1,7 @@
 #pragma once
 #include<iostream>
 #include<vector>
+#include<map>
 #include "ShowRoom.h"
 #include"customer.h"
 #include"buy_rent.h"
@@ -17,6 +18,7 @@ public:
 	vector<Admin> sysAdmin;
 	vector<garage> sysGarage;
 	vector<service> sysService;
+	map<string, int> map_rooms;
 	System();
 	void goto_customer();
 	void goto_Admin();
@@ -27,5 +29,6 @@ public:
 	void insert_services_from_files();
 	void insert_customer_from_files();
 	void insert_process_from_file();
+	void maptest();
 };
 
