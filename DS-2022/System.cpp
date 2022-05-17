@@ -5,8 +5,12 @@ System::System() {
 	// insert showrooms
 	insert_rooms_of_garage_to_file();
 	insert_admins_from_files();
+	 insert_cars_from_files();
+//	 insert_customer_from_files();
+	 maptest();
 	//cout<<sysRoom[0].Name;
-	cout << sysAdmin.size() << endl;
+	// sysRoom[0].AddCar();
+	/*cout << sysAdmin.size() << endl;
 	for (int i = 0; i < sysRoom.size(); i++)
 	{
 		cout << sysAdmin[i].Username << " " << sysAdmin[i].Password << endl;
@@ -31,6 +35,7 @@ System::System() {
 	
 	/*sysRoom[0].AddCar();
 	 */
+	 int n;
 	cout << "Enter 1 for admin or 2 for customer"<<endl;
 	cin >> n;
 	if (n == 1)
@@ -46,23 +51,60 @@ System::System() {
 }
 void System::goto_customer()
 {
-	int n;
-	cout << "press 1 for new customer or 2 for exist" << endl;
-	cin >> n;
-	if (n == 1)
+	while (true)
 	{
-		customer c;
-		syscustomers.push_back(c);
-	}
-	else if (n == 2)
-	{
+		string custmername;
+		int n;
+
+		cout << "press 1 for new customer or 2 for exist" << endl;
+		cin >> n;
+		if (n == 1)
+		{
+			customer c;
+			syscustomers.push_back(c);
+		}
+		else if (n == 2)
+		{
+			//check the name and pass
+			bool found_custeomer = false;
+			cin >> custmername;
+			for (int i = 0; i < syscustomers.size(); i++)
+			{
+				if (syscustomers[i].username == custmername)
+				{
+					string customerpass;
+					cout << "Enter youe password : ";
+					cin >> customerpass;
+					if (syscustomers[i].pass == customerpass)
+					{
+						found_custeomer = true;
+						break;
+					}
+					else
+					{
+						cout << "Wrong password try agian" << endl;
+						i = -1;
+					}
+				}
+				if (!found_custeomer)
+				{
+					cout << "user not found !! Try Again" << endl;
+					goto_customer();
+				}
+			}
+		}
+		else
+		{
+			cout << "ERR0R!!";
+		}
+		/////////////////////////////////////////////////
 		for (int i = 0; i < sysRoom.size(); i++)
 		{
 			cout << sysRoom[i].Name << endl;
 			int carsof_rooms = sysRoom[i].AvalibleCAr.size();
 			for (int j = 0; j < carsof_rooms; j++)
 			{
-				cout << i<<" " << sysRoom[i].AvalibleCAr[j].model << endl;
+				cout << i << " " << sysRoom[i].AvalibleCAr[j].model << endl;
 			}
 			cout << "press 1 to buy a car or 2 to see other rooms" << endl;
 			int choose;
@@ -71,17 +113,20 @@ void System::goto_customer()
 			{
 				cout << "Enter number of choosed car" << endl;
 				cin >> n;
-				// we need to edit id
-				buy_rent buy(5,sysRoom[i].AvalibleCAr[n]);
+				sysRoom[i].AvalibleCAr.erase(sysRoom[i].AvalibleCAr.begin(), sysRoom[i].AvalibleCAr.begin() + n);
 			}
-			else if(choose==2)
+			else if (choose == 2)
 			{
 				continue;
 			}
+
 		}
 		cout << "That's all cars we have" << endl;
 	}
+
+
 }
+
 
 void System::goto_Admin() {
 	int n;
@@ -93,10 +138,12 @@ void System::goto_Admin() {
 		if (n == 1) {
 			Admin A;
 			sysAdmin.push_back(A);
+			break;
 		}
 		else if (n == 2)
 		{
 			bool admin_found = false;
+			cout << "Enter your username : ";
 			cin >> user;
 			for (int i = 0; i < sysAdmin.size(); i++)
 			{
@@ -119,7 +166,8 @@ void System::goto_Admin() {
 					}
 				}
 			}
-
+			if (admin_found)
+				break;
 
 		}
 
@@ -143,10 +191,11 @@ void System::goto_Admin() {
 			{
 				cout << "====Car info======" << endl;
 				sysRoom[i].AddCar();
+				i--;
 			}
 			else
 			{
-				break;
+				continue;
 			}
 		}
 	}
@@ -171,7 +220,7 @@ void System::goto_Admin() {
 }
 
 void System::goto_Garage() {
-	bool garage_flag;
+	bool garage_flag=true;
 	while (garage_flag == true)
 	{
 		cout << "enter 1 to add garage" << endl;
@@ -226,6 +275,7 @@ void System::insert_rooms_of_garage_to_file() {
 		sroom.getline(phone, 70, ' ');
 		Showroom sss(name,location,phone);
 		sysRoom.push_back(sss);
+		
 	}
 }
 void System::insert_admins_from_files()
@@ -256,8 +306,8 @@ void System::insert_cars_from_files()
 	char fcar_price[70];
 	char fcar_instt[70];
 	char fcar_g[70];
-	int gar;
-	fcars.open("cars.text", ios::in);
+	int gar=0;
+	fcars.open("cars.txt", ios::in);
 	while (!fcars.eof())
 	{
 		fcars.getline(fcar_id, 70, ' ');
@@ -266,17 +316,16 @@ void System::insert_cars_from_files()
 		fcars.getline(fcar_instt, 70, ' ');
 		fcars.getline(fcar_year, 70, ' ');
 		fcars.getline(fcar_price, 70, ' ');
-		fcars.getline(fcar_g, 70, ' ');
-		gar = stoi(fcar_g);
+		fcars.getline(fcar_g, 70);
+	//	string ssss = fcar_g;
+	//	gar = stoi(ssss);
 		fstream fcars;
-		for (int i = 0; i < sysRoom.size(); i++)
-		{
-			if (sysRoom[i].ID == gar)
-			{
-				sysRoom[i].AddCar();
-				break;
-			}
-		}
+		gar=map_rooms[fcar_g];
+			//	fcars << id << " " << make << " " << model << " " << install << " " << year << " " << price << " " << g << endl;
+				car xc(fcar_make, fcar_model, fcar_instt, fcar_year, fcar_price);
+				 sysRoom[gar].AvalibleCAr.push_back(xc);
+			
+		
 	}
 }
 void System::insert_services_from_files()
@@ -336,4 +385,12 @@ void System::insert_process_from_file()
 
 
 
+}
+void System::maptest()
+{
+	for (int i = 0; i < sysRoom.size(); i++)
+	{
+		string keyy = to_string(i);
+		map_rooms[keyy] = i;
+	}
 }

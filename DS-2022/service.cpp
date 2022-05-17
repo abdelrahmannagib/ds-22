@@ -11,7 +11,7 @@ service::service(string Name, string Price)
 	counter++;
 
 	name = Name;
-	price = Price;
+	price = stoi(Price);
 }
 service::~service()
 {

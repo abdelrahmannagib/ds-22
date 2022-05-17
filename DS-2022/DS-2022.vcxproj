@@ -139,15 +139,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Admin.h" />
+    <ClInclude Include="buy_rent.h" />
+    <ClInclude Include="car.h" />
     <ClInclude Include="customer.h" />
+    <ClInclude Include="garage.h" />
     <ClInclude Include="process.h" />
     <ClInclude Include="service.h" />
+    <ClInclude Include="ShowRoom.h" />
+    <ClInclude Include="System.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Admin.cpp" />
+    <ClCompile Include="buy_rent.cpp" />
+    <ClCompile Include="car.cpp" />
     <ClCompile Include="customer.cpp" />
+    <ClCompile Include="garage.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="process.cpp" />
     <ClCompile Include="service.cpp" />
+    <ClCompile Include="ShowRoom.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="System.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

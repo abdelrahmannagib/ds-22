@@ -22,10 +22,6 @@ public:
 //	void AddRoom();
 	void AddCar();
 	void UpadateCar();
-
-	
-	
-
 };
 
 

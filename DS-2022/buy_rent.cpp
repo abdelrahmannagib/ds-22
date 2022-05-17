@@ -7,6 +7,6 @@ buy_rent::buy_rent(int id, car c) {
 	cin >> proceess_date;
 	customer_id = id;
 	procees_car.push_back(c);
-	money = c.price;
+	// money = c.price;
 }
 

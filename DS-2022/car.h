@@ -10,8 +10,8 @@ public :
 	string make;
 	string model;
 	string year;
-	double price;
-	double install;
+	string price;
+	string install;
 
 	car(string g);
 	car(string ma, string mo, string ins, string year, string pr);
