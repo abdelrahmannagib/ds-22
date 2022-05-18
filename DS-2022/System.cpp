@@ -6,7 +6,7 @@ System::System() {
 	insert_rooms_of_garage_to_file();
 	insert_admins_from_files();
 	 insert_cars_from_files();
-//	 insert_customer_from_files();
+	 insert_customer_from_files();
 	 maptest();
 	//cout<<sysRoom[0].Name;
 	// sysRoom[0].AddCar();
@@ -35,14 +35,14 @@ System::System() {
 	
 	/*sysRoom[0].AddCar();
 	 */
-	 int n;
+	 int ad_or_cust;
 	cout << "Enter 1 for admin or 2 for customer"<<endl;
-	cin >> n;
-	if (n == 1)
+	cin >> ad_or_cust;
+	if (ad_or_cust == 1)
 	{
 		goto_Admin();
 	}
-	else if (n == 2)
+	else if (ad_or_cust == 2)
 	{
 		goto_customer();
 	}
@@ -51,22 +51,23 @@ System::System() {
 }
 void System::goto_customer()
 {
+	int n;
 	while (true)
 	{
+		bool found_custeomer = false;
 		string custmername;
-		int n;
-
 		cout << "press 1 for new customer or 2 for exist" << endl;
 		cin >> n;
 		if (n == 1)
 		{
 			customer c;
 			syscustomers.push_back(c);
+			found_custeomer = true;
 		}
 		else if (n == 2)
 		{
 			//check the name and pass
-			bool found_custeomer = false;
+			cout << "Enter your user name : ";
 			cin >> custmername;
 			for (int i = 0; i < syscustomers.size(); i++)
 			{
@@ -83,20 +84,18 @@ void System::goto_customer()
 					else
 					{
 						cout << "Wrong password try agian" << endl;
-						i = -1;
+						i --;
 					}
-				}
-				if (!found_custeomer)
-				{
-					cout << "user not found !! Try Again" << endl;
-					goto_customer();
 				}
 			}
 		}
 		else
 		{
-			cout << "ERR0R!!";
+			cout << "Try to login again";
 		}
+		if (found_custeomer)
+			break;
+	}
 		/////////////////////////////////////////////////
 		for (int i = 0; i < sysRoom.size(); i++)
 		{
@@ -104,7 +103,7 @@ void System::goto_customer()
 			int carsof_rooms = sysRoom[i].AvalibleCAr.size();
 			for (int j = 0; j < carsof_rooms; j++)
 			{
-				cout << i << " " << sysRoom[i].AvalibleCAr[j].model << endl;
+				cout << j << " " << sysRoom[i].AvalibleCAr[j].model << endl;
 			}
 			cout << "press 1 to buy a car or 2 to see other rooms" << endl;
 			int choose;
@@ -119,12 +118,8 @@ void System::goto_customer()
 			{
 				continue;
 			}
-
 		}
 		cout << "That's all cars we have" << endl;
-	}
-
-
 }
 
 
@@ -356,8 +351,8 @@ void System::insert_customer_from_files()
 		customerf.getline(customer_id, 70, ' ');
 		customerf.getline(customer_username, 70, ' ');
 		customerf.getline(customer_pass, 70);
-		customer customer(customer_username, customer_pass);
-		syscustomers.push_back(customer);
+		customer cust(customer_username, customer_pass);
+		syscustomers.push_back(cust);
 	}
 }
 void System::insert_process_from_file()
