@@ -21,7 +21,9 @@ public:
 	void UpdateRoomPhone();
 //	void AddRoom();
 	void AddCar();
-	void UpadateCar();
+	void EditShowRoom();
+	void ShowShowRoomData();
+	void EditCar(int num);
 };
 
 
