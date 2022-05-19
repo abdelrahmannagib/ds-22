@@ -84,7 +84,7 @@ void System::goto_customer()
 					else
 					{
 						cout << "Wrong password try agian" << endl;
-						i --;
+						i--;
 					}
 				}
 			}
@@ -96,7 +96,11 @@ void System::goto_customer()
 		if (found_custeomer)
 			break;
 	}
-		/////////////////////////////////////////////////
+	/////////////////////////////////////////////////
+	int choice;
+	cin >> choice;
+	cout << "enter 1 to go to shoowroom or 2 to go to garage";
+	if (choice == 1) {
 		for (int i = 0; i < sysRoom.size(); i++)
 		{
 			cout << sysRoom[i].Name << endl;
@@ -120,7 +124,44 @@ void System::goto_customer()
 			}
 		}
 		cout << "That's all cars we have" << endl;
+	}
+	else if (choice == 2) {
+		for (int i = 0; i < sysGarage.size(); i++)
+		{
+			cout << sysGarage[i].name << endl;
+			int serivcesof_garage = sysGarage[i].gar_services.size();
+			for (int j = 0; j <serivcesof_garage; j++)
+			{
+				cout << j << " " << sysGarage[i].gar_services[j].name<<" "<< sysGarage[i].gar_services[j].price << endl;
+				
+			}
+			cout << "press 1 to chosse service or 2 to see other garages" << endl;
+			int choose;
+			cin >> choose;
+			if (choose == 1)
+			{
+				if (serivcesof_garage > 0) {
+					cout << "Enter number of choosed service" << endl;
+					cin >> n;
+					if (n >= 0 && n < serivcesof_garage) {
+						sysGarage[i].gar_services.erase(sysGarage[i].gar_services.begin(), sysGarage[i].gar_services.begin() + n);
+					}
+					else {
+						cout << "enter a number of true service";
+						i--;
+					}
+				}
+			}
+			else if (choose == 2)
+			{
+				continue;
+			}
+		}
+		cout << "That's all cars we have" << endl;
+	}
+
 }
+
 
 
 void System::goto_Admin() {
