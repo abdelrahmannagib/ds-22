@@ -150,20 +150,18 @@ void System::goto_Admin() {
 					if (sysAdmin[i].Password == pass)
 					{
 						admin_found = true;
+						break;
 					}
-
-
 					else
 					{
 						cout << "Wrong pass please try again" << endl;
-						i = -1;
+						i --;
 
 					}
 				}
 			}
 			if (admin_found)
 				break;
-
 		}
 
 	}
@@ -220,7 +218,8 @@ void System::goto_Garage() {
 	{
 		cout << "enter 1 to add garage" << endl;
 		cout << "enter 2 to edit garage" << endl;
-		cout << "enter 3 if you want to exit";
+		cout << "enter 3 to delete garage" << endl;
+		cout << "enter 4 if you want to exit";
 		int y;
 		cin >> y;
 		if (y == 1) {
@@ -236,7 +235,7 @@ void System::goto_Garage() {
 				cout << "Location :" << sysGarage[i].location << endl;
 				cout << "Name :" << sysGarage[i].name << endl;
 				cout << "Phone :" << sysGarage[i].phone_number << endl;
-				cout << "if do you want to edit it press x ";
+				cout << "if do you want to edit it or add a service press x ";
 				cin >> choice;
 				if (choice == 'x' || choice == 'X')
 				{
@@ -244,7 +243,23 @@ void System::goto_Garage() {
 				}
 			}
 		}
-		else if (y== 3)
+		else if (y == 3)
+		{
+			cout << "Enter a number between 0 and " << sysGarage.size() - 1 << endl;
+			int del_garage;
+			cin >> del_garage;
+			if (y >= 0 && y < sysGarage.size())
+			{
+				// 				sysRoom[i].AvalibleCAr.erase(sysRoom[i].AvalibleCAr.begin(), sysRoom[i].AvalibleCAr.begin() + n);
+				sysGarage.erase(sysGarage.begin(), sysGarage.begin() + del_garage);
+			}
+			else
+			{
+				cout << "Try again";
+				continue;
+			}
+		}
+		else if (y== 4)
 		{
 			garage_flag = false;
 		}
@@ -290,7 +305,6 @@ void System::insert_admins_from_files()
 		sysAdmin.push_back(aa);
 	}
 }
-// to be edited 
 void System::insert_cars_from_files()
 {
 	fstream fcars;
