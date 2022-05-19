@@ -9,10 +9,10 @@ class service
 	int Id;
 	static int counter;
 	string name;
-	double price;
+	string price;
 	service();
 	service(string Name, string Price);
 	~service();
-	void Edit(double price);
+	void Edit();
 };
 
