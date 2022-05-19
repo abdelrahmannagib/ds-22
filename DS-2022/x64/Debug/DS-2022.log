@@ -1,3 +1,5 @@
 ﻿  System.cpp
-S:\project gamed\ds-22\DS-2022\System.cpp(103,52): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+S:\project gamed\ds-22\DS-2022\System.cpp(104,52): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  customer.cpp
+  Generating Code...
   DS-2022.vcxproj -> S:\project gamed\ds-22\x64\Debug\DS-2022.exe

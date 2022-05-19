@@ -1,5 +1,7 @@
 #pragma once
 #include<iostream>
+#include"service.h"
+#include<vector>
 using namespace std;
 class garage
 {
@@ -9,6 +11,7 @@ public:
 	string name;
 	string location;
 	string phone_number;
+	vector<service> gar_services;
 	garage();
 	void edit_garage();
 	void edit_name();
