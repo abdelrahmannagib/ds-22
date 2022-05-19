@@ -1,3 +1,10 @@
 ﻿  System.cpp
+<<<<<<< HEAD
 F:\college\second year\Second-Term\Data Structure\prject new awi\ds-22\DS-2022\System.cpp(111,52): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   DS-2022.vcxproj -> F:\college\second year\Second-Term\Data Structure\prject new awi\ds-22\x64\Debug\DS-2022.exe
+=======
+S:\project gamed\ds-22\DS-2022\System.cpp(104,52): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  customer.cpp
+  Generating Code...
+  DS-2022.vcxproj -> S:\project gamed\ds-22\x64\Debug\DS-2022.exe
+>>>>>>> 9b4115b51a91cb218d1823121ecb9439e0d91569
