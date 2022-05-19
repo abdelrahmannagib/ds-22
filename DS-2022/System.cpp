@@ -36,17 +36,25 @@ System::System() {
 	/*sysRoom[0].AddCar();
 	 */
 	 int ad_or_cust;
-	cout << "Enter 1 for admin or 2 for customer"<<endl;
-	cin >> ad_or_cust;
-	if (ad_or_cust == 1)
-	{
-		goto_Admin();
-	}
-	else if (ad_or_cust == 2)
-	{
-		goto_customer();
-	}
-	
+	 while (true)
+	 {
+
+
+		 cout << "Enter 1 for admin, 2 for customer, 3 to stop program " << endl;
+		 cin >> ad_or_cust;
+		 if (ad_or_cust == 1)
+		 {
+			 goto_Admin();
+		 }
+		 else if (ad_or_cust == 2)
+		 {
+			 goto_customer();
+		 }
+		 else if (ad_or_cust == 3)
+		 {
+
+		 }
+	 }
 
 }
 void System::goto_customer()
