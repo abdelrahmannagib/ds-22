@@ -92,7 +92,7 @@ void System::goto_customer()
 					else
 					{
 						cout << "Wrong password try agian" << endl;
-						i --;
+						i--;
 					}
 				}
 			}
@@ -104,7 +104,11 @@ void System::goto_customer()
 		if (found_custeomer)
 			break;
 	}
-		/////////////////////////////////////////////////
+	/////////////////////////////////////////////////
+	int choice;
+	cin >> choice;
+	cout << "enter 1 to go to shoowroom or 2 to go to garage";
+	if (choice == 1) {
 		for (int i = 0; i < sysRoom.size(); i++)
 		{
 			cout << sysRoom[i].Name << endl;
@@ -128,12 +132,50 @@ void System::goto_customer()
 			}
 		}
 		cout << "That's all cars we have" << endl;
+	}
+	else if (choice == 2) {
+		for (int i = 0; i < sysGarage.size(); i++)
+		{
+			cout << sysGarage[i].name << endl;
+			int serivcesof_garage = sysGarage[i].gar_services.size();
+			for (int j = 0; j <serivcesof_garage; j++)
+			{
+				cout << j << " " << sysGarage[i].gar_services[j].name<<" "<< sysGarage[i].gar_services[j].price << endl;
+				
+			}
+			cout << "press 1 to chosse service or 2 to see other garages" << endl;
+			int choose;
+			cin >> choose;
+			if (choose == 1)
+			{
+				if (serivcesof_garage > 0) {
+					cout << "Enter number of choosed service" << endl;
+					cin >> n;
+					if (n >= 0 && n < serivcesof_garage) {
+						sysGarage[i].gar_services.erase(sysGarage[i].gar_services.begin(), sysGarage[i].gar_services.begin() + n);
+					}
+					else {
+						cout << "enter a number of true service";
+						i--;
+					}
+				}
+			}
+			else if (choose == 2)
+			{
+				continue;
+			}
+		}
+		cout << "That's all cars we have" << endl;
+	}
+
 }
+
 
 
 void System::goto_Admin() {
 	int n;
 	string user;
+	int x;
 	while (true)
 	{
 		cout << "New Admin press 1 or press 2 for old admin : \n ";
@@ -173,51 +215,147 @@ void System::goto_Admin() {
 		}
 
 	}
-	int x;
-	cout << "Welcome " << user << " press 1 for showrooms or 2 for garage" << endl;
-	cin >> x;
-	if (x == 1)
-	{
-		for (int i = 0; i < sysRoom.size(); i++)
+	while (true)
 		{
-			int x;
-			cout << "=========Room info============" << endl;
-			cout << "ID :" << sysRoom[i].ID << endl;
-			cout << "Name :" << sysRoom[i].Name << endl;
-			cout << "Location :" << sysRoom[i].Location << endl;
-			cout << "Phone :" << sysRoom[i].Phone << endl;
-			cout << "Add Car press(1),press any button to skip :";
+			cout << "Welcome " << user << " press 1 for showrooms, 2 for garage, 3 to exit" << endl;
 			cin >> x;
 			if (x == 1)
 			{
-				cout << "====Car info======" << endl;
-				sysRoom[i].AddCar();
-				i--;
+				
+				
+					int input;
+
+					while (true)
+					{
+						cout << "Press 1 to Add showroom, 2 to Edit, 3 to Delete, 4 to show a showroom, 5 to exit: ";
+						cin >> input;
+						if (input == 1) // add showroom
+						{
+							Showroom ShowNew;
+							sysRoom.push_back(ShowNew);
+
+						}
+						else if (input == 2) // edit showroom
+						{
+							int roomNo=0;
+							int number=0;
+							for (int i = 0; i < sysRoom.size(); i++)
+							{
+								sysRoom[i].ShowShowRoomData();
+							}
+							while (true)
+							{
+
+
+								cout << "press 1 to edit showroom, 2 to edit car, 3 to exit: " << endl;
+								cin >> number;
+								if (number == 1)
+								{
+									cout << "Which Room do you want to edit in?" << endl;
+									cin >> roomNo;
+									sysRoom[roomNo].EditShowRoom();
+									break;
+								}
+								else if (number == 2)
+								{
+									int RoomNo=0, CarNo=0;
+									cout << "enter showroom number and car number: " << endl;
+									sysRoom[RoomNo].EditCar(CarNo);
+									break;
+								}
+								else if (number == 3)
+								{
+									break;
+								}
+								else
+								{
+									cout << "Invalid number, please enter  a valid number" << endl;
+								
+								}
+							}
+
+						}
+						else if (input == 3) // delete showroom
+						{
+							int n1=0;
+							int n2=0;
+							for (int i = 0; i < sysRoom.size(); i++)
+							{
+								sysRoom[i].ShowShowRoomData();
+							}
+							while (true)
+							{
+
+
+								cout << "Press 1 to delete a showroom, 2 to delete a car, 3 to exit: " << endl;
+								cin >> n1;
+								if (n1 == 1)
+								{
+									cout << "Which ShowRoom do you want to delete?" << endl;
+									cin >> n2;
+									sysRoom.erase(sysRoom.begin(), sysRoom.begin() + n2);
+								}
+								else if (n1 == 2)
+								{
+									int s1=0, car1=0;
+									cout << "enter showroom number and car number:  " << endl;
+									cin >> s1, car1;
+									sysRoom[s1].AvalibleCAr.erase(sysRoom[s1].AvalibleCAr.begin(), sysRoom[s1].AvalibleCAr.begin() + car1);
+								}
+								else if (n1 == 3)
+								{
+									break;
+								}
+								else
+								{
+									cout << "Invalid number, please select a valid number." << endl;
+								}
+
+							}
+
+						}
+						else if (input == 4)
+						{
+							for (int i = 0; i < sysRoom.size(); i++)
+							{
+								sysRoom[i].ShowShowRoomData();
+							}
+						}
+						else if (input == 5)
+						{
+							break;
+						}
+						else
+						{
+							cout << "Wrong number, please enter a valid number.";
+						}
+					}
+				
+
+			}
+			else if (x == 2)
+			{
+				int AccessGarage;
+				cout << "press(1) to show your garage : ";
+				cin >> AccessGarage;
+				if (AccessGarage == 1) {
+					goto_Garage();
+				}
+				else
+				{
+					cout << "ERROR!" << endl;
+				}
+			}
+			else if (x == 3)
+			{
+				break;
 			}
 			else
 			{
-				continue;
+				cout << "ERROR!" << endl;
 			}
 		}
-	}
-	else if (x == 2)
-	{
-		int AccessGarage;
-		cout << "press(1) to show your garage : ";
-		cin >> AccessGarage;
-		if (AccessGarage == 1) {
-			goto_Garage();
-		}
-		else
-		{
-			cout << "ERROR!" << endl;
-		}
-	}
-	else
-	{
-		cout << "ERROR!" << endl;
-	}
-
+	
 }
 
 void System::goto_Garage() {
