@@ -12,6 +12,7 @@ public:
 	string location;
 	string phone_number;
 	vector<service> gar_services;
+	
 	garage();
 	void edit_garage();
 	void edit_name();

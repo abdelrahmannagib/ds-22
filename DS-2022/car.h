@@ -19,5 +19,6 @@ public :
     void edit_price();
 	void edit_install();
 	void Edit();
+	void ShowCarData();
 };
 

@@ -19,9 +19,15 @@ public:
 	vector<garage> sysGarage;
 	vector<service> sysService;
 	map<string, int> map_rooms;
+
+	map<string, pair<bool, int>>GarageSearch;
+	map<string, bool> ServiceFound;
+	map<string, pair<int, int>> ServiceGarageId;
+
 	map<string, pair<bool,int> >Showroom_search;
 	map<string, bool> car_found;
 	map<string, pair<int, int>> car_room_ids;
+
 	System();
 	void goto_customer();
 	void goto_Admin();
@@ -33,6 +39,8 @@ public:
 	void insert_customer_from_files();
 	void insert_process_from_file();
 	void maptest();
+	void SearchForGarage();
+	void SearchForService();
 	void search_Showrrom();
 	void search_car();
 };

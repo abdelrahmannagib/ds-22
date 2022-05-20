@@ -14,5 +14,6 @@ class service
 	service(string Name, string Price);
 	~service();
 	void Edit();
+	void ShowServiceData();
 };
 
