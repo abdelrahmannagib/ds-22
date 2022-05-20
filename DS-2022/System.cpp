@@ -112,7 +112,13 @@ void System::goto_customer()
 	while (true)
 	{
 		int ch;
-		cout << "enter 1 to go to shoowroom, 2 to go to garage, 3 to exit: " << endl;
+		cout << "-Press 1 to go to shoowroom" << endl;
+		cout << "-Press 2 to go to garage" << endl;
+		cout << "-Press 3 to search for a car" << endl;
+		cout << "-Press 4 to search for a service" << endl;
+		cout << "-Press 5 to search for a showroom" << endl;
+		cout << "-Press 6 to search for a garage" << endl;
+		cout << "-Press 7 to exit" << endl;
 		cin >> choice;
 		if (choice == 1)
 		{
@@ -121,6 +127,7 @@ void System::goto_customer()
 				cout <<"Name of showroom: " << sysRoom[i].Name << endl;
 				for (int j = 0; j < sysRoom[i].AvalibleCAr.size(); j++)
 				{
+					cout << "(" << j + 1 <<")" << endl;
 					sysRoom[i].AvalibleCAr[j].ShowCarData();
 				}
 				while (true)
@@ -212,6 +219,22 @@ void System::goto_customer()
 			cout << "That's all services we have" << endl;
 		}
 		else if (choice == 3)
+		{
+			search_car();
+		}
+		else if (choice == 4)
+		{
+			SearchForService();
+		}
+		else if (choice == 5)
+		{
+			search_Showrrom();
+		}
+		else if (choice == 6)
+		{
+			SearchForGarage();
+		}
+		else if (choice == 7)
 		{
 			break;
 		}
@@ -636,7 +659,6 @@ void System::SearchForGarage()
 	else
 		cout << "Not Found." << endl;
 }
-
 void System::SearchForService()
 {
 	string ser;
@@ -668,8 +690,6 @@ void System::SearchForService()
 		}
 	}
 }
-
-
 void System::search_Showrrom()
 {
 	for (int i = 0; i < sysRoom.size(); i++)
