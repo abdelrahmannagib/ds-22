@@ -27,7 +27,6 @@ void garage::edit_phone() {
 	string phone;
 	cin >> phone;
 }
-
 void garage::edit_garage() {
 	while (true)
 	{

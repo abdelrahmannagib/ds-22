@@ -47,3 +47,9 @@ void service::Edit()
 		}
 	}
 }
+
+void service::ShowServiceData()
+{
+	cout << "Service's Name  |  Service's Price" << endl;
+	cout << name << "  |  " << price << endl;
+}
