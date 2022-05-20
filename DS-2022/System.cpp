@@ -600,6 +600,7 @@ void System::maptest()
 		map_rooms[keyy] = i;
 	}
 }
+
 void System::SearchForGarage()
 {
 	string sG;
@@ -664,6 +665,77 @@ void System::SearchForService()
 
 			sysGarage[gar].gar_services.erase(sysGarage[gar].gar_services.begin(), sysGarage[gar].gar_services.begin()+s);
 			cout << "service is sold.";
+		}
+	}
+}
+
+
+void System::search_Showrrom()
+{
+	for (int i = 0; i < sysRoom.size(); i++)
+	{
+		Showroom_search[sysRoom[i].Name].first = true;
+		Showroom_search[sysRoom[i].Name].second = i;
+	}
+	cout << "Enter the name of garge you want to search"<<endl;
+	string se;
+	cin >> se;
+	int roomid;
+	if (Showroom_search[se].first == true)
+	{
+		cout << "Found" << endl;
+		roomid = Showroom_search[se].second;
+		for (int j = 0; j < sysRoom[roomid].AvalibleCAr.size(); j++)
+		{
+			cout << j << " " << sysRoom[roomid].AvalibleCAr[j].model << endl;
+		}
+		cout << "press 1 to buy a car or 2 to back" << endl;
+		int choose;
+		cin >> choose;
+		if (choose == 1)
+		{
+			int car_tobuy;
+			cout << "Enter number of choosed car" << endl;
+			cin >> car_tobuy;
+			sysRoom[roomid].AvalibleCAr.erase(sysRoom[roomid].AvalibleCAr.begin(), sysRoom[roomid].AvalibleCAr.begin() + car_tobuy);
+		}
+	}
+	else
+		cout << "NOt found" << endl;
+}
+void System::search_car() {
+	/*
+	map<string, bool> car_found;
+	map<string, pair<int, int>> car_room_ids;
+	*/
+	for (int i = 0; i < sysRoom.size(); i++)
+	{
+		for (int j = 0; j < sysRoom[i].AvalibleCAr.size(); j++)
+		{
+			string m= sysRoom[i].AvalibleCAr[j].make;
+			car_found[m] = true;
+			car_room_ids[m].first = i;
+			car_room_ids[m].second = j;
+		}
+	}
+	cout << "Enter the name of car you want to search" << endl;
+	string se;
+	cin >> se;
+	if (car_found[se])
+	{
+		// show car data and ask to buy
+
+		cout << "Press 1 if you want to buy else press any button" << endl;
+		int c;
+		cin >> c;
+		if (c == 1)
+		{
+			int g, ca;
+			g = car_room_ids[se].first;
+			ca = car_room_ids[se].second;
+			// sysRoom[i].AvalibleCAr.erase(sysRoom[i].AvalibleCAr.begin(), sysRoom[i].AvalibleCAr.begin() + n);
+			sysRoom[g].AvalibleCAr.erase(sysRoom[g].AvalibleCAr.begin(), sysRoom[g].AvalibleCAr.begin() + ca);
+			cout << "Buy done" << endl;
 		}
 	}
 }
