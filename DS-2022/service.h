@@ -10,7 +10,7 @@ class service
 	static int counter;
 	string name;
 	string price;
-	service();
+	service(string g_id);
 	service(string Name, string Price);
 	~service();
 	void Edit();

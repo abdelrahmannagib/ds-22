@@ -28,19 +28,6 @@ garage::garage(string s1, string s2, string s3)
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 void garage::edit_location() {
 	cout << "enter the new location";
 	string loc;
@@ -82,7 +69,8 @@ void garage::edit_garage() {
 			cin >> y;
 			if (y == 1)
 			{
-				service s_new;
+				string g_id = to_string(id);
+				service s_new(g_id);
 				gar_services.push_back(s_new);
 			}
 			else if (y == 2)
