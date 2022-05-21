@@ -63,6 +63,7 @@ void System::goto_customer()
 	int choice;
 	int choose;
 	int choose2;
+	
 	while (true)
 	{
 		bool found_customer = false;
@@ -127,7 +128,7 @@ void System::goto_customer()
 				cout <<"Name of showroom: " << sysRoom[i].Name << endl;
 				for (int j = 0; j < sysRoom[i].AvalibleCAr.size(); j++)
 				{
-					cout << "(" << j + 1 <<")" << endl;
+					cout <<  j  << endl;
 					sysRoom[i].AvalibleCAr[j].ShowCarData();
 				}
 				while (true)
@@ -145,13 +146,17 @@ void System::goto_customer()
 							cout << "Enter number of choosen car: " << endl;
 							cin >> num;
 
+							
+							
+
 							while (num < 0 && num>=sysRoom[i].AvalibleCAr.size() )
 							{
 								cout << "Enter a valid number \n";
 								cin >> num;
 
 							}
-
+              sysRoom[i].AvalibleCAr.erase(sysRoom[i].AvalibleCAr.begin(), sysRoom[i].AvalibleCAr.begin() + num);
+							cout << "Car is sold." << endl;
                            
 							break;
 						}
@@ -200,6 +205,7 @@ void System::goto_customer()
 						if (sysGarage[i].gar_services.size() > 0) {
 							cout << "Enter number of choosen service: " << endl;
 							cin >> n;
+
 
 							while (n <0 && num >= sysGarage[i].gar_services.size() )
 							{
@@ -381,7 +387,7 @@ void System::goto_Admin() {
 								{
 									int s1=0, car1=0;
 									cout << "enter showroom number and car number:  " << endl;
-									cin >> s1, car1;
+									cin >> s1>> car1;
 									sysRoom[s1].AvalibleCAr.erase(sysRoom[s1].AvalibleCAr.begin(), sysRoom[s1].AvalibleCAr.begin() + car1);
 								}
 								else if (n1 == 3)
