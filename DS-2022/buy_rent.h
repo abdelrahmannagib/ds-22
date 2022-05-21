@@ -6,13 +6,13 @@
 using namespace std;
 class buy_rent
 {
-	public:
-	static int p_counter;
-	int procees_id;
-	string proceess_date;
-	int customer_id;
-	vector <car> procees_car;
-	int money;
-	buy_rent(int id, car c);
+public:
+	static int p_Counter;
+	int p_Id;
+	string p_Date;
+	string customer_Id;
+	string money;
+	string choosen_service;
+	buy_rent(string cust_Id, string mon, string service);
 };
 
