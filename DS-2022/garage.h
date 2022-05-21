@@ -14,6 +14,7 @@ public:
 	vector<service> gar_services;
 	
 	garage();
+	garage(string, string, string);
 	void edit_garage();
 	void edit_name();
 	void edit_location();
