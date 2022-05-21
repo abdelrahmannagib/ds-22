@@ -144,8 +144,15 @@ void System::goto_customer()
 						{
 							cout << "Enter number of choosen car: " << endl;
 							cin >> num;
-							sysRoom[i].AvalibleCAr.erase(sysRoom[i].AvalibleCAr.begin(), sysRoom[i].AvalibleCAr.begin() + num);
-							cout << "Car is sold." << endl;
+
+							while (num < 0 && num>=sysRoom[i].AvalibleCAr.size() )
+							{
+								cout << "Enter a valid number \n";
+								cin >> num;
+
+							}
+
+                           
 							break;
 						}
 						else if (ch == 2)
@@ -193,13 +200,17 @@ void System::goto_customer()
 						if (sysGarage[i].gar_services.size() > 0) {
 							cout << "Enter number of choosen service: " << endl;
 							cin >> n;
-							if (n >= 0 && n < sysGarage[i].gar_services.size()) {
-								sysGarage[i].gar_services.erase(sysGarage[i].gar_services.begin(), sysGarage[i].gar_services.begin() + n);
+
+							while (n <0 && num >= sysGarage[i].gar_services.size() )
+							{
+
+								cout << "Enter a valid choice  \n";
+								cin >> n;
 							}
-							else {
-								cout << "Invalid, please enter a valid choice." << endl;;
-								/*i--;*/
-							}
+
+							cout << "Service done !!!! \n";
+
+							
 						}
 					}
 					else if (choose2 == 2)
@@ -210,10 +221,7 @@ void System::goto_customer()
 					{
 						break;
 					}
-					else
-					{
-						cout << "Invalid, please enter a valid choice" << endl;
-					}
+					
 				}
 			}
 			cout << "That's all services we have" << endl;
@@ -508,6 +516,41 @@ void System::insert_rooms_of_garage_to_file() {
 		
 	}
 }
+
+void System::insert_garage_from_file()
+{
+	fstream garagee;
+	char id[70];
+	char name[70];
+	char location[70];
+	char phone_number[70];
+	garagee.open("garagee.txt", ios::in);
+
+	while (!garagee.eof())
+	{
+		garagee.getline(id, 70, ' ');
+		garagee.getline(name, 70, ' ');
+		garagee.getline(location, 70, ' ');
+		garagee.getline(phone_number, 70);
+		garage gg(name, location, phone_number);
+		sysGarage.push_back(gg);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 void System::insert_admins_from_files()
 {
 	fstream fadmin;
