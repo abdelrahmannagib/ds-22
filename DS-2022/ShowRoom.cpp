@@ -40,7 +40,7 @@ void Showroom::UpdateRoomPhone() {
 	cin >> Phone;
 }
 void Showroom::AddCar() {
-	string s_id = to_string (ID);
+	 string s_id = to_string (ID);
 	 car c(s_id);
 	 AvalibleCAr.push_back(c);
 }
