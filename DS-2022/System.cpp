@@ -174,7 +174,7 @@ void System::goto_customer()
 							cout << "Enter number of choosen car: " << endl;
 							cin >> num;
 							string carInstall = sysRoom[i].AvalibleCAr[num].install;
-							sysRoom[i].AvalibleCAr.erase(sysRoom[i].AvalibleCAr.begin(), sysRoom[i].AvalibleCAr.begin() + num);
+						//	sysRoom[i].AvalibleCAr.erase(sysRoom[i].AvalibleCAr.begin(), sysRoom[i].AvalibleCAr.begin() + num);
 							cout << "Car is rented" << endl;
 							buy_rent serProcess(current_cust_id, carInstall, "rent");
 							history_cust[current_cust_id].push_back(serProcess);
