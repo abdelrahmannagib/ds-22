@@ -1,12 +1,15 @@
 #include "buy_rent.h"
-int buy_rent::p_counter = 0;
-buy_rent::buy_rent(int id, car c) {
-	cout << "hi we are at buyrent" << endl;
-	procees_id = p_counter++;
-	cout << "Enter date of buy" << endl;
-	cin >> proceess_date;
-	customer_id = id;
-	procees_car.push_back(c);
-	// money = c.price;
-}
+int buy_rent::p_Counter = 0;
 
+buy_rent::buy_rent(string cust_Id, string mon, string service)
+{
+	p_Id = p_Counter;
+	p_Counter++;
+	
+	customer_Id = cust_Id;
+	money = mon;
+	choosen_service = service;
+	
+	cout << "Enter the Date: " << endl;
+	cin >> p_Date;
+}

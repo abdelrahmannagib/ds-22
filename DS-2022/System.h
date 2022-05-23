@@ -40,9 +40,9 @@ public:
 	void insert_process_from_file();
 	void insert_garage_from_file();
 	void maptest();
-	void SearchForGarage();
-	void SearchForService();
-	void search_Showrrom();
-	void search_car();
+	void SearchForGarage(string customerId);
+	void SearchForService(string customerId);
+	void search_Showrrom(string customerId);
+	void search_car(string customerId);
 };
 
