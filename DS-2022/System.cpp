@@ -3,11 +3,13 @@
 #include<string>
 System::System() {
 	// insert showrooms
-	insert_rooms_of_garage_to_file();
 	insert_admins_from_files();
-	 insert_cars_from_files();
-	 insert_customer_from_files();
+	insert_customer_from_files();
+	insert_rooms_of_garage_to_file();
+	insert_garage_from_file();
 	 maptest();
+	 insert_cars_from_files();
+	 insert_services_from_files();
 	//cout<<sysRoom[0].Name;
 	// sysRoom[0].AddCar();
 	/*cout << sysAdmin.size() << endl;
@@ -162,6 +164,7 @@ void System::goto_customer()
 							sysRoom[i].AvalibleCAr.erase(sysRoom[i].AvalibleCAr.begin(), sysRoom[i].AvalibleCAr.begin() + num);
 							cout << "Car is sold." << endl;
 							buy_rent serProcess(current_cust_id, carPrice, "buy");
+							history_cust[current_cust_id].push_back(serProcess);
 							break;
 						}
 						else if (ch == 2)
@@ -174,6 +177,7 @@ void System::goto_customer()
 							sysRoom[i].AvalibleCAr.erase(sysRoom[i].AvalibleCAr.begin(), sysRoom[i].AvalibleCAr.begin() + num);
 							cout << "Car is rented" << endl;
 							buy_rent serProcess(current_cust_id, carInstall, "rent");
+							history_cust[current_cust_id].push_back(serProcess);
 							break;
 						}
 
@@ -222,11 +226,7 @@ void System::goto_customer()
 							string serPrice = sysGarage[i].gar_services[n].price;
 							string serName = sysGarage[i].gar_services[n].name;
 							buy_rent proc(current_cust_id, serPrice, serName);
-
-
-
-
-
+							history_cust[current_cust_id].push_back(proc);
 							cout << "Service done !!!! \n";
 
 
@@ -263,6 +263,11 @@ void System::goto_customer()
 		}
 		else if (choice == 7)
 		{
+			
+		for (int i = 0; i < history_cust[current_cust_id].size(); i++)
+			{
+			cout << history_cust[current_cust_id][i].choosen_service << endl;
+			}
 			break;
 		}
 		else
@@ -271,10 +276,6 @@ void System::goto_customer()
 		}
 		}
 	}
-
-
-
-
 void System::goto_Admin() {
 	int n;
 	string user;
@@ -597,7 +598,7 @@ void System::insert_cars_from_files()
 		fcars.getline(fcar_g, 70);
 	//	string ssss = fcar_g;
 	//	gar = stoi(ssss);
-		fstream fcars;
+	//	fstream fcars;
 		gar=map_rooms[fcar_g];
 			//	fcars << id << " " << make << " " << model << " " << install << " " << year << " " << price << " " << g << endl;
 				car xc(fcar_make, fcar_model, fcar_instt, fcar_year, fcar_price);
@@ -612,14 +613,19 @@ void System::insert_services_from_files()
 	char fservice_id[70];
 	char fservice_name[70];
 	char fservice_price[70];
+	char fserv_g[70];
+	int gar=0;
 	fservice.open("service.txt", ios::in);
 	while (!fservice.eof())
 	{
 		fservice.getline(fservice_id, 70, ' ');
 		fservice.getline(fservice_name, 70, ' ');
-		fservice.getline(fservice_price, 70);
-		service service(fservice_name, fservice_price);
-		sysService.push_back(service);
+		fservice.getline(fservice_price, 70,' ');
+		fservice.getline(fserv_g, 70);
+		service servicce(fservice_name, fservice_price);
+		sysService.push_back(servicce);
+		gar = map_garage[fserv_g];
+		sysGarage[gar].gar_services.push_back(servicce);
 	}
 }
 void System::insert_customer_from_files()
@@ -671,6 +677,11 @@ void System::maptest()
 		string keyy = to_string(i);
 		map_rooms[keyy] = i;
 	}
+	for (int i = 0; i < sysGarage.size(); i++)
+	{
+		string keyy = to_string(i);
+		map_garage[keyy] = i;
+	}
 }
 void System::SearchForGarage(string customerId)
 {
@@ -701,8 +712,8 @@ void System::SearchForGarage(string customerId)
 			cin >> serviceTobuy;
 			string serPrice = sysGarage[garageId].gar_services[serviceTobuy].price;
 			string serName = sysGarage[garageId].gar_services[serviceTobuy].name;
-			sysGarage[garageId].gar_services.erase(sysGarage[garageId].gar_services.begin(), sysGarage[garageId].gar_services.begin()+serviceTobuy);
 			buy_rent process(customerId,serPrice,serName);
+			history_cust[customerId].push_back(process);
 		}
 
 	}
@@ -737,8 +748,8 @@ void System::SearchForService(string customerId)
 			s = ServiceGarageId[ser].second;
 			string serPrice = sysGarage[gar].gar_services[buy].price;
 			string serName = sysGarage[gar].gar_services[buy].name;
-			sysGarage[gar].gar_services.erase(sysGarage[gar].gar_services.begin(), sysGarage[gar].gar_services.begin()+s);
 			buy_rent process(customerId, serPrice,serName);
+			history_cust[customerId].push_back(process);
 			cout << "service is sold.";
 		}
 	}
@@ -773,6 +784,7 @@ void System::search_Showrrom(string customerId)
 			string carPrice = sysRoom[roomid].AvalibleCAr[car_tobuy].price;
 			sysRoom[roomid].AvalibleCAr.erase(sysRoom[roomid].AvalibleCAr.begin(), sysRoom[roomid].AvalibleCAr.begin() + car_tobuy);
 			buy_rent process(customerId,carPrice,"buy");
+			history_cust[customerId].push_back(process);
 			cout << "buy done" << endl;
 		}
 		if (choose == 2)
@@ -781,8 +793,8 @@ void System::search_Showrrom(string customerId)
 			cout << "Enter number of choosed car" << endl;
 			cin >> car_tobuy;
 			string carInstall = sysRoom[roomid].AvalibleCAr[car_tobuy].install;
-			sysRoom[roomid].AvalibleCAr.erase(sysRoom[roomid].AvalibleCAr.begin(), sysRoom[roomid].AvalibleCAr.begin() + car_tobuy);
 			buy_rent process(customerId, carInstall, "rent");
+			history_cust[customerId].push_back(process);
 			cout << "rent done" << endl;
 		}
 	}
@@ -824,6 +836,7 @@ void System::search_car(string customerId) {
 			// sysRoom[i].AvalibleCAr.erase(sysRoom[i].AvalibleCAr.begin(), sysRoom[i].AvalibleCAr.begin() + n);
 			sysRoom[g].AvalibleCAr.erase(sysRoom[g].AvalibleCAr.begin(), sysRoom[g].AvalibleCAr.begin() + ca);
 			buy_rent process(customerId,carPrice,"buy");
+			history_cust[customerId].push_back(process);
 			cout << "Buy done" << endl;
 		}
 		if (c == 2)
@@ -833,8 +846,8 @@ void System::search_car(string customerId) {
 			ca = car_room_ids[se].second;
 			string carInstall = sysRoom[g].AvalibleCAr[ca].install;
 			// sysRoom[i].AvalibleCAr.erase(sysRoom[i].AvalibleCAr.begin(), sysRoom[i].AvalibleCAr.begin() + n);
-			sysRoom[g].AvalibleCAr.erase(sysRoom[g].AvalibleCAr.begin(), sysRoom[g].AvalibleCAr.begin() + ca);
 			buy_rent process(customerId, carInstall, "rent");
+			history_cust[customerId].push_back(process);
 			cout << "rent done" << endl;
 		}
 	}
