@@ -59,7 +59,7 @@ System::System() {
 }
 void System::goto_customer()
 {
-	int n, num, num2;
+	int n, num;
 	int choice;
 	int choose;
 	int choose2;
@@ -213,7 +213,7 @@ void System::goto_customer()
 						if (sysGarage[i].gar_services.size() > 0) {
 							cout << "Enter number of choosen service: " << endl;
 							cin >> n;
-							while (n < 0 && num >= sysGarage[i].gar_services.size())
+							while (n < 0 && n >= sysGarage[i].gar_services.size())
 							{
 
 								cout << "Enter a valid choice  \n";
