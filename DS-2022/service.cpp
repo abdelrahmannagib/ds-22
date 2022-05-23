@@ -1,8 +1,9 @@
 #include "Service.h"
 #include<iostream>
+#include<fstream>
 int service::counter = 1;
 using namespace std;
-service::service()
+service::service(string g_id)
 {
 	Id = counter;
 	counter++;
@@ -10,6 +11,9 @@ service::service()
 	cin >> name;
 	cout << "Enter srevice price : ";
 	cin >> price;
+	fstream fservice;
+	fservice.open("service.txt", ios::app);
+	fservice<<Id<<' ' << name << ' ' << price<< g_id <<' ' << endl;
 
 }
 service::service(string Name, string Price)

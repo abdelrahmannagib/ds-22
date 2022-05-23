@@ -38,6 +38,7 @@ public:
 	void insert_services_from_files();
 	void insert_customer_from_files();
 	void insert_process_from_file();
+	void insert_garage_from_file();
 	void maptest();
 	void SearchForGarage(string customerId);
 	void SearchForService(string customerId);

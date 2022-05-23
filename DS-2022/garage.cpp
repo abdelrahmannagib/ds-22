@@ -1,4 +1,5 @@
 #include "garage.h"
+#include<fstream>
 int garage::count_garage = 1;
 garage::garage()
 {
@@ -10,8 +11,23 @@ garage::garage()
 	cin >> this->location;
 	cout << "Enter phone number" << endl;
 	cin >> this->phone_number;
+	fstream garagee;
+
+	garagee.open("garagee.txt", ios::app);
+	garagee <<id << " " << name << " " << location << " " << phone_number << endl;
 
 }
+
+garage::garage(string s1, string s2, string s3)
+{
+	id = count_garage;
+	name = s1;
+	location = s2;
+	phone_number = s3;
+	count_garage++;
+}
+
+
 void garage::edit_location() {
 	cout << "enter the new location";
 	string loc;
@@ -53,7 +69,8 @@ void garage::edit_garage() {
 			cin >> y;
 			if (y == 1)
 			{
-				service s_new;
+				string g_id = to_string(id);
+				service s_new(g_id);
 				gar_services.push_back(s_new);
 			}
 			else if (y == 2)

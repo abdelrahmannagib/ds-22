@@ -64,6 +64,7 @@ void System::goto_customer()
 	int choose;
 	int choose2;
 	string current_cust_id;
+
 	while (true)
 	{
 		bool found_customer = false;
@@ -130,7 +131,8 @@ void System::goto_customer()
 				cout <<"Name of showroom: " << sysRoom[i].Name << endl;
 				for (int j = 0; j < sysRoom[i].AvalibleCAr.size(); j++)
 				{
-					cout << j << endl;
+
+					cout <<  j  << endl;
 					sysRoom[i].AvalibleCAr[j].ShowCarData();
 				}
 				while (true)
@@ -149,10 +151,20 @@ void System::goto_customer()
 							
 							cout << "Enter number of choosen car: " << endl;
 							cin >> num;
+              
+							while (num < 0 && num>=sysRoom[i].AvalibleCAr.size() )
+							{
+								cout << "Enter a valid number \n";
+								cin >> num;
+
+							}
 							string carPrice = sysRoom[i].AvalibleCAr[num].price;
 							sysRoom[i].AvalibleCAr.erase(sysRoom[i].AvalibleCAr.begin(), sysRoom[i].AvalibleCAr.begin() + num);
 							cout << "Car is sold." << endl;
 							buy_rent serProcess(current_cust_id, carPrice, "buy");
+
+							
+				
 							break;
 						}
 						else if (ch == 2)
@@ -204,17 +216,23 @@ void System::goto_customer()
 						if (sysGarage[i].gar_services.size() > 0) {
 							cout << "Enter number of choosen service: " << endl;
 							cin >> n;
+              		while (n <0 && num >= sysGarage[i].gar_services.size() )
+							{
+
+								cout << "Enter a valid choice  \n";
+								cin >> n;
+							}
 							string serPrice = sysGarage[i].gar_services[n].price;
 							string serName = sysGarage[i].gar_services[n].name;
-							if (n >= 0 && n < sysGarage[i].gar_services.size()) {
-								sysGarage[i].gar_services.erase(sysGarage[i].gar_services.begin(), sysGarage[i].gar_services.begin() + n);
-								buy_rent proc(current_cust_id,serPrice, serName);
-							}
-							else {
-								cout << "Invalid, please enter a valid choice." << endl;;
-								/*i--;*/
-							}
-						}
+							buy_rent proc(current_cust_id,serPrice, serName);
+							
+
+
+					
+
+							cout << "Service done !!!! \n";
+
+							
 					}
 					else if (choose2 == 2)
 					{
@@ -224,10 +242,7 @@ void System::goto_customer()
 					{
 						break;
 					}
-					else
-					{
-						cout << "Invalid, please enter a valid choice" << endl;
-					}
+					
 				}
 			}
 			cout << "That's all services we have" << endl;
@@ -387,7 +402,7 @@ void System::goto_Admin() {
 								{
 									int s1=0, car1=0;
 									cout << "enter showroom number and car number:  " << endl;
-									cin >> s1, car1;
+									cin >> s1>> car1;
 									sysRoom[s1].AvalibleCAr.erase(sysRoom[s1].AvalibleCAr.begin(), sysRoom[s1].AvalibleCAr.begin() + car1);
 								}
 								else if (n1 == 3)
@@ -522,6 +537,41 @@ void System::insert_rooms_of_garage_to_file() {
 		
 	}
 }
+
+void System::insert_garage_from_file()
+{
+	fstream garagee;
+	char id[70];
+	char name[70];
+	char location[70];
+	char phone_number[70];
+	garagee.open("garagee.txt", ios::in);
+
+	while (!garagee.eof())
+	{
+		garagee.getline(id, 70, ' ');
+		garagee.getline(name, 70, ' ');
+		garagee.getline(location, 70, ' ');
+		garagee.getline(phone_number, 70);
+		garage gg(name, location, phone_number);
+		sysGarage.push_back(gg);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 void System::insert_admins_from_files()
 {
 	fstream fadmin;
