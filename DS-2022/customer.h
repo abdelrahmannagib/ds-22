@@ -1,6 +1,8 @@
 #pragma once
-using namespace std;
 #include <string>
+#include<vector>
+#include"buy_rent.h"
+using namespace std;
 class customer
 {
 public: 

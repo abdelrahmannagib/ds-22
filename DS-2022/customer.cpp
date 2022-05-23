@@ -1,4 +1,5 @@
 #include "customer.h"
+#include"buy_rent.h"
 #include<fstream>
 using namespace std;
 #include<iostream>
@@ -23,4 +24,3 @@ customer::customer(string user, string pass)
 	username = user;
 	this->pass = pass;
 }
-

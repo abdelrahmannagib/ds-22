@@ -19,11 +19,11 @@ public:
 	vector<garage> sysGarage;
 	vector<service> sysService;
 	map<string, int> map_rooms;
-
+	map<string, int> map_garage;
+	map<string, vector<buy_rent>> history_cust;
 	map<string, pair<bool, int>>GarageSearch;
 	map<string, bool> ServiceFound;
 	map<string, pair<int, int>> ServiceGarageId;
-
 	map<string, pair<bool,int> >Showroom_search;
 	map<string, bool> car_found;
 	map<string, pair<int, int>> car_room_ids;
