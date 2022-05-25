@@ -37,6 +37,7 @@ System::System() {
 	
 	/*sysRoom[0].AddCar();
 	 */
+	 cout << "Gargee  " << sysGarage.size() << endl;
 	 int ad_or_cust;
 	 while (true)
 	 {
@@ -66,12 +67,11 @@ void System::goto_customer()
 	int choose;
 	int choose2;
 	string current_cust_id;
-
+	bool found_customer = false;
 	while (true)
 	{
-		bool found_customer = false;
 		string custmername;
-		cout << "press 1 for new customer or 2 for exist" << endl;
+		cout << "press 1 for new customer , 2 for exist or 3 to exit " << endl;
 		cin >> n;
 		if (n == 1)
 		{
@@ -106,6 +106,10 @@ void System::goto_customer()
 				}
 			}
 		}
+		else if (n == 3)
+		{
+			break;
+		}
 		else
 		{
 			cout << "Try to login again";
@@ -115,7 +119,7 @@ void System::goto_customer()
 	}
 	/////////////////////////////////////////////////
 
-	while (true)
+	while (true&&found_customer)
 	{
 		int ch;
 		cout << "-Press 1 to go to shoowroom" << endl;
@@ -281,18 +285,20 @@ void System::goto_Admin() {
 	string user;
 	int x;
 	int input;
+	bool admin_found = false;
+
 	while (true)
 	{
-		cout << "New Admin press 1 or press 2 for old admin : \n ";
+		cout << "New Admin press 1 or press 2 for old admin or 3 to go back : \n ";
 		cin >> n;
 		if (n == 1) {
 			Admin A;
 			sysAdmin.push_back(A);
+			admin_found = true;
 			break;
 		}
 		else if (n == 2)
 		{
-			bool admin_found = false;
 			cout << "Enter your username : ";
 			cin >> user;
 			for (int i = 0; i < sysAdmin.size(); i++)
@@ -310,7 +316,7 @@ void System::goto_Admin() {
 					else
 					{
 						cout << "Wrong pass please try again" << endl;
-						i --;
+						i--;
 
 					}
 				}
@@ -318,18 +324,17 @@ void System::goto_Admin() {
 			if (admin_found)
 				break;
 		}
+		else if (n == 3)
+			break;
 
 	}
-	while (true)
-		{
+	while (true&&admin_found)
+	{
 			cout << "Welcome " << user << " press 1 for showrooms, 2 for garage, 3 to exit" << endl;
 			cin >> x;
 			if (x == 1)
-			{	
-				
-					
-
-					while (true)
+			{
+		    		while (true)
 					{
 						cout << "Press 1 to Add showroom, 2 to Edit, 3 to Delete, 4 to show a showroom, 5 to exit: ";
 						cin >> input;
@@ -384,6 +389,7 @@ void System::goto_Admin() {
 							int n2=0;
 							for (int i = 0; i < sysRoom.size(); i++)
 							{
+								cout <<"INDEX " << i << endl;
 								sysRoom[i].ShowShowRoomData();
 							}
 							while (true)
@@ -438,16 +444,7 @@ void System::goto_Admin() {
 			}
 			else if (x == 2)
 			{
-				int AccessGarage;
-				cout << "press(1) to show your garage : ";
-				cin >> AccessGarage;
-				if (AccessGarage == 1) {
 					goto_Garage();
-				}
-				else
-				{
-					cout << "ERROR!" << endl;
-				}
 			}
 			else if (x == 3)
 			{
@@ -457,10 +454,9 @@ void System::goto_Admin() {
 			{
 				cout << "ERROR!" << endl;
 			}
-		}
+	}
 	
 }
-
 void System::goto_Garage() {
 	bool garage_flag=true;
 	while (garage_flag == true)
@@ -497,16 +493,13 @@ void System::goto_Garage() {
 			cout << "Enter a number between 0 and " << sysGarage.size() - 1 << endl;
 			int del_garage;
 			cin >> del_garage;
-			if (y >= 0 && y < sysGarage.size())
+			 while(del_garage<0&& del_garage>=sysGarage.size())
 			{
-				// 				sysRoom[i].AvalibleCAr.erase(sysRoom[i].AvalibleCAr.begin(), sysRoom[i].AvalibleCAr.begin() + n);
-				sysGarage.erase(sysGarage.begin(), sysGarage.begin() + del_garage);
+				 cout << "Wrong input try again: ";
+				 cin >> del_garage;
 			}
-			else
-			{
-				cout << "Try again";
-				continue;
-			}
+			sysGarage.erase(sysGarage.begin(), sysGarage.begin() + del_garage);
+
 		}
 		else if (y== 4)
 		{
@@ -518,26 +511,28 @@ void System::goto_Garage() {
 
 	}
 }
-// from file to vector of rooms
 void System::insert_rooms_of_garage_to_file() {
 
 	fstream sroom;
-	char room_id[70];
+	/*char room_id[70];
 	char name[70];
 	char location[70];
 	char phone[70];
+	*/
+	string name, room_id, location, phone;
 	sroom.open("showroom.txt", ios::in);
 	while (!sroom.eof()) {
-		sroom.getline(room_id, 70, ' ');
+		/*sroom.getline(room_id, 70, ' ');
 		sroom.getline(name, 70, ' ');
 		sroom.getline(location, 70, ' ');
 		sroom.getline(phone, 70, ' ');
+		*/
+		sroom >> room_id >> name >> location >> phone;
 		Showroom sss(name,location,phone);
 		sysRoom.push_back(sss);
-		
 	}
+	sysRoom.pop_back();
 }
-
 void System::insert_garage_from_file()
 {
 	fstream garagee;
@@ -556,8 +551,8 @@ void System::insert_garage_from_file()
 		garage gg(name, location, phone_number);
 		sysGarage.push_back(gg);
 	}
+	sysGarage.pop_back();
 }
-
 void System::insert_admins_from_files()
 {
 	fstream fadmin;
