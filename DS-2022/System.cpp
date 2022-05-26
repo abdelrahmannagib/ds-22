@@ -4,6 +4,9 @@
 #include<utility>
 
 
+
+
+
 System::System() {
 	// insert showrooms
 	insert_admins_from_files();
@@ -122,14 +125,12 @@ void System::goto_customer()
 	while (true)
 	{
 		int ch;
+		int c;
 		int resORbuy;
 		cout << "-Press 1 to go to shoowroom" << endl;
 		cout << "-Press 2 to go to garage" << endl;
-		cout << "-Press 3 to search for a car" << endl;
-		cout << "-Press 4 to search for a service" << endl;
-		cout << "-Press 5 to search for a showroom" << endl;
-		cout << "-Press 6 to search for a garage" << endl;
-		cout << "-Press 7 to exit" << endl;
+		cout << "-press 3 to search" << endl;		
+		cout << "-Press 4 to exit" << endl;
 		cin >> choice;
 		if (choice == 1)
 		{
@@ -148,7 +149,6 @@ void System::goto_customer()
 				while (true)
 				{
 					int buyres;
-					int buyindex;
 					string roomId;
 					string carPrice;
 					int carId;
@@ -175,6 +175,7 @@ void System::goto_customer()
 							cin >> resORbuy;
 							if (resORbuy == 1)
 							{
+								cout << "Price of car is: " << sysRoom[i].AvalibleCAr[num].price << endl;
 								carPrice = sysRoom[i].AvalibleCAr[num].price;
 								sysRoom[i].AvalibleCAr.erase(sysRoom[i].AvalibleCAr.begin(), sysRoom[i].AvalibleCAr.begin() + num);
 								cout << "Car is sold." << endl;
@@ -186,6 +187,7 @@ void System::goto_customer()
 							{
 								sysRoom[i].AvalibleCAr[num].appear = false;
 								reserveCar(current_cust_id, sysRoom[i].AvalibleCAr[num]);
+								cout << "reservation is done." << endl;
 							}
 							else if (resORbuy == 3)
 							{
@@ -202,6 +204,7 @@ void System::goto_customer()
 							cout << "Enter number of choosen car: " << endl;
 							cin >> num;
 							string carInstall = sysRoom[i].AvalibleCAr[num].install;
+							cout << "Car Installment is: " << carInstall << endl;
 						//	sysRoom[i].AvalibleCAr.erase(sysRoom[i].AvalibleCAr.begin(), sysRoom[i].AvalibleCAr.begin() + num);
 							cout << "Car is rented" << endl;
 							buy_rent serProcess(current_cust_id, carInstall, "rent");
@@ -305,30 +308,65 @@ void System::goto_customer()
 						}
 
 					}
+					else if (choose2 == 2)
+					{
+						continue;
+					}
+					else if (choose == 3)
+					{
+						break;
+					}
+					else
+					{
+						cout << "Invalid, please enter a valid number." << endl;
+					}
 				}
 				cout << "That's all services we have" << endl;
 			}
 		}
 		else if (choice == 3)
 		{
-			search_car(current_cust_id);
+			while (true)
+			{
+
+
+				cout << "======== Search Options ========" << endl;
+				cout << "-Press 1 to search for a car" << endl;
+				cout << "-Press 2 to search for a service" << endl;
+				cout << "-Press 3 to search for a showroom" << endl;
+				cout << "-Press 4 to search for a garage" << endl;
+				cout << "press 5 to exit" << endl;
+				cin >> c;
+				if (c == 1)
+				{
+					search_car(current_cust_id);
+				}
+				else if (c == 2)
+				{
+					SearchForService(current_cust_id);
+				}
+				else if (c == 3)
+				{
+					search_Showrrom(current_cust_id);
+				}
+				else if (c == 4)
+				{
+					SearchForGarage(current_cust_id);
+				}
+				else if (c == 5)
+				{
+					break;
+				}
+				else
+				{
+					cout << "Invalid, please enter a valid number." << endl;
+				}
+			}
 		}
 		else if (choice == 4)
 		{
-			SearchForService(current_cust_id);
-		}
-		else if (choice == 5)
-		{
-			search_Showrrom(current_cust_id);
-		}
-		else if (choice == 6)
-		{
-			SearchForGarage(current_cust_id);
-		}
-		else if (choice == 7)
-		{
-		cout << "-----------------------------" << endl;
-		cout << "History: " << endl;
+			cout << "-----------------------------" << endl;
+			cout << "History: " << endl;
 			for (int i = 0; i < history_cust[current_cust_id].size(); i++)
 			{
 				cout << " =>  " << history_cust[current_cust_id][i].choosen_service << endl;
@@ -339,8 +377,8 @@ void System::goto_customer()
 		{
 			cout << "Invalid number, please enter a valid number.";
 		}
-		}
 	}
+}
 void System::goto_Admin() {
 	int n;
 	string user;
@@ -528,6 +566,7 @@ void System::goto_Admin() {
 
 void System::goto_Garage() {
 	bool garage_flag=true;
+	char choice;
 	while (garage_flag == true)
 	{
 		cout << "enter 1 to add garage" << endl;
@@ -543,13 +582,13 @@ void System::goto_Garage() {
 		else if (y == 2) {
 			for (int i = 0; i < sysGarage.size(); i++)
 			{
-				char choice;
-				cout << "======Garage info======" << endl;
+				sysGarage[i].showGarageData();
+				/*cout << "======Garage info======" << endl;
 				cout << "ID :" << sysGarage[i].id << endl;
 				cout << "Location :" << sysGarage[i].location << endl;
 				cout << "Name :" << sysGarage[i].name << endl;
-				cout << "Phone :" << sysGarage[i].phone_number << endl;
-				cout << "if do you want to edit it or add a service press x ";
+				cout << "Phone :" << sysGarage[i].phone_number << endl;*/
+				cout << "if do you want to edit it or add a service press (x) " << endl;
 				cin >> choice;
 				if (choice == 'x' || choice == 'X')
 				{
@@ -578,7 +617,7 @@ void System::goto_Garage() {
 			garage_flag = false;
 		}
 		else {
-			cout << "enter correct number";
+			cout << "Invalid, please enter a valid number." << endl;
 		}
 
 	}
@@ -753,42 +792,73 @@ void System::SearchForGarage(string customerId)
 	string sG;
 	int garageId;
 	int ch2;
+	int ch;
 	int serviceTobuy;
 	for (int i = 0; i < sysGarage.size(); i++)
 	{
 		GarageSearch[sysGarage[i].name].first = true;
 		GarageSearch[sysGarage[i].name].second = i;
+
+		sysGarage[i].showGarageData();
 	}
-	cout << "Enter the name of garage you want to search: ";
-	cin >> sG;
-	if (GarageSearch[sG].first == true)
+	
+	while (true)
 	{
-		cout << "Found" << endl;
-		garageId = GarageSearch[sG].second;
-		for (int i = 0; i < sysGarage[garageId].gar_services.size(); i++)
-		{
-			sysGarage[garageId].gar_services[i].ShowServiceData();
-		}
-		cout << "Press 1 to buy, 2 to exit: ";
+		cout << "press 1 to search, 2 to exit: " << endl;
 		cin >> ch2;
 		if (ch2 == 1)
 		{
-			cout << "Enter number of choosen service: ";
-			cin >> serviceTobuy;
-			string serPrice = sysGarage[garageId].gar_services[serviceTobuy].price;
-			string serName = sysGarage[garageId].gar_services[serviceTobuy].name;
-			buy_rent process(customerId,serPrice,serName);
-			history_cust[customerId].push_back(process);
+			cout << "Enter the name of garage you want to search: " << endl;
+			cin >> sG;
+		}
+		else if (ch2 == 2)
+		{
+			break;
+		}
+		else
+		{
+			cout << "Invalid, please enter a valid number." << endl;
 		}
 
+		if (GarageSearch[sG].first == true)
+		{
+			cout << "Found" << endl;
+			garageId = GarageSearch[sG].second;
+			for (int i = 0; i < sysGarage[garageId].gar_services.size(); i++)
+			{
+				sysGarage[garageId].gar_services[i].ShowServiceData();
+			}
+			cout << "Press 1 to buy, 2 to exit: ";
+			cin >> ch;
+			if (ch == 1)
+			{
+				cout << "Enter number of choosen service: ";
+				cin >> serviceTobuy;
+				string serPrice = sysGarage[garageId].gar_services[serviceTobuy].price;
+				string serName = sysGarage[garageId].gar_services[serviceTobuy].name;
+				buy_rent process(customerId, serPrice, serName);
+				history_cust[customerId].push_back(process);
+				cout << "Purchase is done." << endl;
+			}
+			else if (ch == 2)
+			{
+				break;
+			}
+			else
+			{
+				cout << "Invalid, please enter a valid number." << endl;
+			}
+
+		}
+		else
+			cout << "Not Found." << endl;
 	}
-	else
-		cout << "Not Found." << endl;
 }
 void System::SearchForService(string customerId)
 {
 	string ser;
 	int buy;
+	int ch2;
 	int gar, s;
 	for (int i = 0; i < sysGarage.size(); i++)
 	{
@@ -798,79 +868,205 @@ void System::SearchForService(string customerId)
 			ServiceFound[m] = true;
 			ServiceGarageId[m].first = i;
 			ServiceGarageId[m].second = j;
+			
+			sysGarage[i].gar_services[i].ShowServiceData();
 		}
 	}
-	cout << "Enter the name of service you want to search: ";
-	cin >> ser;
-	if (ServiceFound[ser])
+	
+	while (true)
 	{
-		cout << "Press 1 to buy: ";
-		cin >> buy;
-		
-		if (buy == 1)
+
+		cout << "press 1 to search, 2 to exit: " << endl;
+		cin >> ch2;
+		if (ch2 == 1)
 		{
-			gar = ServiceGarageId[ser].first;
-			s = ServiceGarageId[ser].second;
-			string serPrice = sysGarage[gar].gar_services[buy].price;
-			string serName = sysGarage[gar].gar_services[buy].name;
-			buy_rent process(customerId, serPrice,serName);
-			history_cust[customerId].push_back(process);
-			cout << "service is sold.";
+			cout << "Enter the name of service you want to search: " << endl;
+			cin >> ser;
 		}
+		else if (ch2 == 2)
+		{
+			break;
+		}
+		else
+		{
+			cout << "Invalid, please enter a valid number." << endl;
+		}
+
+		if (ServiceFound[ser])
+		{
+			cout << "Press 1 to buy: ";
+			cin >> buy;
+
+			if (buy == 1)
+			{
+				gar = ServiceGarageId[ser].first;
+				s = ServiceGarageId[ser].second;
+				string serPrice = sysGarage[gar].gar_services[buy].price;
+				string serName = sysGarage[gar].gar_services[buy].name;
+				buy_rent process(customerId, serPrice, serName);
+				history_cust[customerId].push_back(process);
+				cout << "Purchase is done." << endl;
+			}
+		}
+		else
+			cout << "Not found." << endl;
 	}
 }
 void System::search_Showrrom(string customerId)
 {
+	string se;
+	int ch;
+	int ch2;
+	int roomid;
+	int car_tobuy;
+	string rId;
+	int cId;
+	int buyres;
+	string carPrice;
 	for (int i = 0; i < sysRoom.size(); i++)
 	{
 		Showroom_search[sysRoom[i].Name].first = true;
 		Showroom_search[sysRoom[i].Name].second = i;
+		
+		sysRoom[i].ShowShowRoomData();
 	}
-	cout << "Enter the name of showroom you want to search"<<endl;
-	string se;
-	cin >> se;
-	int roomid;
-	if (Showroom_search[se].first == true)
+	while (true)
 	{
-		cout << "Found" << endl;
-		roomid = Showroom_search[se].second;
-		for (int j = 0; j < sysRoom[roomid].AvalibleCAr.size(); j++)
+		cout << "press 1 to search, 2 to exit: " << endl;
+		cin >> ch2;
+		if (ch2 == 1)
 		{
-			cout << j << " " << sysRoom[roomid].AvalibleCAr[j].model << endl;
+			cout << "enter the name of showroom you want to search:" << endl;
+			cin >> se;
 		}
-		cout << "press 1 to buy a car,2 to rent, any button to back" << endl;
-		int choose;
-		cin >> choose;
-		if (choose == 1)
+		else if (ch2 == 2)
 		{
-			int car_tobuy;
-			cout << "Enter number of choosed car" << endl;
-			cin >> car_tobuy;
-			string carPrice = sysRoom[roomid].AvalibleCAr[car_tobuy].price;
-			sysRoom[roomid].AvalibleCAr.erase(sysRoom[roomid].AvalibleCAr.begin(), sysRoom[roomid].AvalibleCAr.begin() + car_tobuy);
-			buy_rent process(customerId,carPrice,"buy");
-			history_cust[customerId].push_back(process);
-			cout << "buy done" << endl;
+			break;
 		}
-		if (choose == 2)
+		else
 		{
-			int car_tobuy;
-			cout << "Enter number of choosed car" << endl;
-			cin >> car_tobuy;
-			string carInstall = sysRoom[roomid].AvalibleCAr[car_tobuy].install;
-			buy_rent process(customerId, carInstall, "rent");
-			history_cust[customerId].push_back(process);
-			cout << "rent done" << endl;
+			cout << "Invalid, please enter a valid number." << endl;
 		}
+
+		if (Showroom_search[se].first == true)
+		{
+			while (true)
+			{
+
+				cout << "Found" << endl;
+				roomid = Showroom_search[se].second;
+				for (int j = 0; j < sysRoom[roomid].AvalibleCAr.size(); j++)
+				{
+					cout << j << " " << sysRoom[roomid].AvalibleCAr[j].model << endl;
+				}
+				cout << "press 1 to buy or reserve a car,2 to rent, 3 to show reserved car, 4 to exit: " << endl;
+				int choose;
+				cin >> choose;
+				if (choose == 1)
+				{
+					cout << "Enter number of choosen car" << endl;
+					cin >> car_tobuy;
+					cout << "press 1 to buy now, 2 to reserve a car, 3 to exit: " << endl;
+					cin >> ch;
+					if (ch == 1)
+					{
+
+						cout << "Price of car is: " << sysRoom[roomid].AvalibleCAr[car_tobuy].price << endl;
+						string carPrice = sysRoom[roomid].AvalibleCAr[car_tobuy].price;
+						sysRoom[roomid].AvalibleCAr.erase(sysRoom[roomid].AvalibleCAr.begin(), sysRoom[roomid].AvalibleCAr.begin() + car_tobuy);
+						buy_rent process(customerId, carPrice, "buy");
+						history_cust[customerId].push_back(process);
+						cout << "buy done" << endl;
+					}
+					else if (ch == 2)
+					{
+						sysRoom[roomid].AvalibleCAr[car_tobuy].appear = false;
+						reserveCar(customerId, sysRoom[roomid].AvalibleCAr[car_tobuy]);
+						cout << "reservation is done." << endl;
+					}
+					else if (ch == 3)
+					{
+						break;
+					}
+					else
+					{
+						cout << "Invalid, please enter a valid number." << endl;
+					}
+				}
+				else if (choose == 2)
+				{
+					int car_tobuy;
+					cout << "Enter number of choosed car" << endl;
+					cin >> car_tobuy;
+					string carInstall = sysRoom[roomid].AvalibleCAr[car_tobuy].install;
+					cout << "Car Installment is: " << carInstall << endl;
+					buy_rent process(customerId, carInstall, "rent");
+					history_cust[customerId].push_back(process);
+					cout << "rent done" << endl;
+				}
+				else if (choose == 3)
+				{
+					for (int i = 0; i < reservedCar[customerId].size(); i++)
+					{
+						cout << i << endl;
+						reservedCar[customerId][i].ShowCarData();
+
+						rId = reservedCar[customerId][i].belong;
+						cId = reservedCar[customerId][i].id;
+						carPrice = reservedCar[customerId][i].id;
+
+						cout << "-----------------------------------------------" << endl;
+						cout << "note: if you don't buy the car now, the reserve will be cancelled." << endl;
+						cout << "-----------------------------------------------" << endl;
+						cout << "press 1 to buy car, 2 to exit: " << endl;
+						cin >> buyres;
+						if (buyres == 1)
+						{
+							buy_rent serProcess(customerId, carPrice, "buy");
+							history_cust[customerId].push_back(serProcess);
+							sellOrCancel(rId, cId, 1);
+						}
+						else if (buyres == 2)
+						{
+							sellOrCancel(rId, cId, 2);
+						}
+						else
+						{
+							cout << "Invalid,please enter a valid number." << endl;
+						}
+					}
+				}
+				else if (choose == 4)
+				{
+					break;
+				}
+				else
+				{
+					cout << "Invalid, please enter a valid number." << endl;
+				}
+
+			}
+		}
+		else
+			cout << "Not found" << endl;
 	}
-	else
-		cout << "NOt found" << endl;
 }
-void System::search_car(string customerId) {
+void System::search_car(string customerId)
+{
 	/*
 	map<string, bool> car_found;
 	map<string, pair<int, int>> car_room_ids;
 	*/
+	string se;
+	int cho;
+	int ch2;
+	int g, ca;
+	string roomId;
+	int carId;
+	int buyres;
+	
+	string carPrice;
+
 	for (int i = 0; i < sysRoom.size(); i++)
 	{
 		for (int j = 0; j < sysRoom[i].AvalibleCAr.size(); j++)
@@ -879,41 +1075,133 @@ void System::search_car(string customerId) {
 			car_found[m] = true;
 			car_room_ids[m].first = i;
 			car_room_ids[m].second = j;
+
+			sysRoom[i].AvalibleCAr[j].ShowCarData();
 		}
 	}
-	cout << "Enter the name of car you want to search" << endl;
-	string se;
-	cin >> se;
-	if (car_found[se])
-	{
-		// show car data and ask to buy
 
-		cout << "Press 1 if you want to buy, 2 to rent, else press any button" << endl;
-		int c;
-		cin >> c;
-		
-		if (c == 1)
+	while (true)
+	{
+
+
+		cout << "press 1 to search, 2 to exit: " << endl;
+		cin >> ch2;
+		if (ch2 == 1)
 		{
-			int g, ca;
-			g = car_room_ids[se].first;
-			ca = car_room_ids[se].second;
-			string carPrice = sysRoom[g].AvalibleCAr[ca].price;
-			// sysRoom[i].AvalibleCAr.erase(sysRoom[i].AvalibleCAr.begin(), sysRoom[i].AvalibleCAr.begin() + n);
-			sysRoom[g].AvalibleCAr.erase(sysRoom[g].AvalibleCAr.begin(), sysRoom[g].AvalibleCAr.begin() + ca);
-			buy_rent process(customerId,carPrice,"buy");
-			history_cust[customerId].push_back(process);
-			cout << "Buy done" << endl;
+			cout << "enter the make of the car you want to search:" << endl;
+			cin >> se;
 		}
-		if (c == 2)
+		else if (ch2 == 2)
 		{
-			int g, ca;
-			g = car_room_ids[se].first;
-			ca = car_room_ids[se].second;
-			string carInstall = sysRoom[g].AvalibleCAr[ca].install;
-			// sysRoom[i].AvalibleCAr.erase(sysRoom[i].AvalibleCAr.begin(), sysRoom[i].AvalibleCAr.begin() + n);
-			buy_rent process(customerId, carInstall, "rent");
-			history_cust[customerId].push_back(process);
-			cout << "rent done" << endl;
+			break;
+		}
+		else
+		{
+			cout << "Invalid, please enter a valid number." << endl;
+		}
+		
+
+		g = car_room_ids[se].first;				//which showroom
+		ca = car_room_ids[se].second;			//which car(index)
+		carPrice = sysRoom[g].AvalibleCAr[ca].price;
+
+		if (car_found[se])
+		{
+			while (true)
+			{
+
+
+				cout << "Press 1 if you want to buy or reserve, 2 to rent, 3 to show your reserved cars,  4 to exit:" << endl;
+				int c;
+				cin >> c;
+
+				if (c == 1)
+				{
+					cout << "press 1 to immediate buy, 2 to reserve car, 3 to exit:" << endl;
+
+					cin >> cho;
+					if (cho == 1)
+					{
+						cout << "Price of car is: " << sysRoom[g].AvalibleCAr[ca].price << endl;
+						// sysRoom[i].AvalibleCAr.erase(sysRoom[i].AvalibleCAr.begin(), sysRoom[i].AvalibleCAr.begin() + n);
+						sysRoom[g].AvalibleCAr.erase(sysRoom[g].AvalibleCAr.begin(), sysRoom[g].AvalibleCAr.begin() + ca);
+						buy_rent process(customerId, carPrice, "buy");
+						history_cust[customerId].push_back(process);
+						cout << "Buy done" << endl;
+					}
+					else if (cho == 2)
+					{
+						sysRoom[g].AvalibleCAr[ca].appear = false;
+						reserveCar(customerId, sysRoom[g].AvalibleCAr[ca]);
+						cout << "reservation is done." << endl;
+					}
+					else if (cho == 3)
+					{
+						break;
+					}
+					else
+					{
+						cout << "Invalid, please enter a valid number." << endl;
+					}
+				}
+				else if (c == 2)
+				{
+					int g, ca;
+					g = car_room_ids[se].first;
+					ca = car_room_ids[se].second;
+					string carInstall = sysRoom[g].AvalibleCAr[ca].install;
+					cout << "Car Installment is: " << carInstall << endl;
+					// sysRoom[i].AvalibleCAr.erase(sysRoom[i].AvalibleCAr.begin(), sysRoom[i].AvalibleCAr.begin() + n);
+					buy_rent process(customerId, carInstall, "rent");
+					history_cust[customerId].push_back(process);
+					cout << "rent done" << endl;
+				}
+				else if (c == 3)
+				{
+					for (int i = 0; i < reservedCar[customerId].size(); i++)
+					{
+						cout << i << endl;
+						reservedCar[customerId][i].ShowCarData();
+
+						roomId = reservedCar[customerId][i].belong;
+						carId = reservedCar[customerId][i].id;
+						carPrice = reservedCar[customerId][i].id;
+
+						cout << "-----------------------------------------------" << endl;
+						cout << "note: if you don't buy the car now, the reserve will be cancelled." << endl;
+						cout << "-----------------------------------------------" << endl;
+						cout << "press 1 to buy car, 2 to exit: " << endl;
+						cin >> buyres;
+						if (buyres == 1)
+						{
+							buy_rent serProcess(customerId, carPrice, "buy");
+							history_cust[customerId].push_back(serProcess);
+							sellOrCancel(roomId, carId, 1);
+						}
+						else if (buyres == 2)
+						{
+							sellOrCancel(roomId, carId, 2);
+						}
+						else
+						{
+							cout << "Invalid,please enter a valid number." << endl;
+						}
+					}
+				}
+				else if (c == 4)
+				{
+					break;
+				}
+				else
+				{
+					cout << "Invalid, please enter a valid number." << endl;
+				}
+
+			}
+		}
+		else
+		{
+			cout << "Not found." << endl;
 		}
 	}
 }
@@ -929,7 +1217,7 @@ void System::reserveCar(string customerId, car c)
 void System::sellOrCancel(string rId, int cId, int BuyorCancel)
 {
 	int x = map_rooms[rId];
-	int carIndex;
+	int carIndex = 0;
 	for (int i = 0; i < sysRoom[x].AvalibleCAr.size(); i++)
 	{
 		if (sysRoom[x].AvalibleCAr[i].id == cId)

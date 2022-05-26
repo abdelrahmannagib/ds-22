@@ -1,4 +1,5 @@
 #include "garage.h"
+#include"service.h"
 #include<fstream>
 int garage::count_garage = 1;
 garage::garage()
@@ -43,6 +44,22 @@ void garage::edit_phone() {
 	string phone;
 	cin >> phone;
 }
+void garage::showGarageData()
+{
+	cout << "======Garage info======" << endl;
+	cout << "ID: " << id << endl;
+	cout << "Location: " << location << endl;
+	cout << "Name: " << name << endl;
+	cout << "Phone: " << phone_number << endl;
+
+	cout << "======== Services ========" << endl;
+	for (int i = 0; i < gar_services.size(); i++)
+	{
+		cout << "Service's Name: " << gar_services[i].name  << endl;
+		cout << "Service's Price: " << gar_services[i].price << endl;
+	}
+	
+}
 void garage::edit_garage() {
 	while (true)
 	{
@@ -50,7 +67,7 @@ void garage::edit_garage() {
 		cout << "press 2 to edit location" << endl;
 		cout << "press 3 to edit phone" << endl;
 		cout << "press 4 for services " << endl;
-		cout << "Press any button to stop";
+		cout << "press 5 to exit" << endl;
 		int x;
 		cin >> x;
 		if (x == 1) {
@@ -106,8 +123,13 @@ void garage::edit_garage() {
 				}
 			}
 		}
-		else {
+		else if (x == 5)
+		{
 			break;
+		}
+		else 
+		{
+			cout << "Invalid, please enter a valid number." << endl;
 		}
 	}
 }

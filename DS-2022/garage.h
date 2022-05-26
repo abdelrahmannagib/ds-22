@@ -19,5 +19,6 @@ public:
 	void edit_name();
 	void edit_location();
 	void edit_phone();
+	void showGarageData();
 };
 
