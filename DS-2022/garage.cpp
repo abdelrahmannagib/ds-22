@@ -44,7 +44,8 @@ void garage::edit_phone() {
 	cin >> phone;
 }
 void garage::edit_garage() {
-	while (true)
+	bool edittt = true;
+	while (edittt)
 	{
 		cout << "press 1 to edit name" << endl;
 		cout << "press 2 to edit location" << endl;
@@ -107,7 +108,7 @@ void garage::edit_garage() {
 			}
 		}
 		else {
-			break;
+			edittt = false;
 		}
 	}
 }

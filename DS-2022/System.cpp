@@ -24,7 +24,7 @@ System::System() {
 		Showroom s;
 		sysRoom.push_back(s);
 	}
-	else if (n == 2)
+	else if (n == "2")
 	{
 		garage g;
 		sysGarage.push_back(g);
@@ -444,7 +444,8 @@ void System::goto_Admin() {
 			}
 			else if (x == 2)
 			{
-					goto_Garage();
+				goto_Garage();
+			
 			}
 			else if (x == 3)
 			{
@@ -457,21 +458,22 @@ void System::goto_Admin() {
 	}
 	
 }
-void System::goto_Garage() {
-	bool garage_flag=true;
-	while (garage_flag == true)
+void System::goto_Garage()
+{
+	while (true)
 	{
 		cout << "enter 1 to add garage" << endl;
 		cout << "enter 2 to edit garage" << endl;
 		cout << "enter 3 to delete garage" << endl;
 		cout << "enter 4 if you want to exit";
-		int y;
+		string y;
 		cin >> y;
-		if (y == 1) {
+		if (y == "1") {
 			garage g;
 			sysGarage.push_back(g);
 		}
-		else if (y == 2) {
+		else if (y == "2")
+		{
 			for (int i = 0; i < sysGarage.size(); i++)
 			{
 				char choice;
@@ -486,29 +488,29 @@ void System::goto_Garage() {
 				{
 					sysGarage[i].edit_garage();
 				}
+				else
+				{
+					continue;
+				}
 			}
 		}
-		else if (y == 3)
+		else if (y == "3")
 		{
 			cout << "Enter a number between 0 and " << sysGarage.size() - 1 << endl;
 			int del_garage;
 			cin >> del_garage;
-			 while(del_garage<0&& del_garage>=sysGarage.size())
+			while (del_garage < 0 && del_garage >= sysGarage.size())
 			{
-				 cout << "Wrong input try again: ";
-				 cin >> del_garage;
+				cout << "Wrong input try again: ";
+				cin >> del_garage;
 			}
 			sysGarage.erase(sysGarage.begin(), sysGarage.begin() + del_garage);
 
 		}
-		else if (y== 4)
+		else
 		{
-			garage_flag = false;
+			break;
 		}
-		else {
-			cout << "enter correct number";
-		}
-
 	}
 }
 void System::insert_rooms_of_garage_to_file() {
