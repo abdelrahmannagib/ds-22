@@ -2,12 +2,14 @@
 #include<iostream>
 #include<vector>
 #include<map>
+#include<queue>
 #include "ShowRoom.h"
 #include"customer.h"
 #include"buy_rent.h"
 #include"Admin.h"
 #include"garage.h"
 #include"service.h"
+
 using namespace std;
 class System
 {
@@ -18,6 +20,7 @@ public:
 	vector<Admin> sysAdmin;
 	vector<garage> sysGarage;
 	vector<service> sysService;
+	map<string, vector<car>> reservedCar;
 	map<string, int> map_rooms;
 	map<string, int> map_garage;
 	map<string, vector<buy_rent>> history_cust;
@@ -44,5 +47,8 @@ public:
 	void SearchForService(string customerId);
 	void search_Showrrom(string customerId);
 	void search_car(string customerId);
+	void reserveCar(string customerId,car c);
+	void sellOrCancel(string rId, int cId, int BuyorCancel);
+	
 };
 

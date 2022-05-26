@@ -10,6 +10,6 @@ buy_rent::buy_rent(string cust_Id, string mon, string service)
 	money = mon;
 	choosen_service = service;
 	
-	cout << "Enter the Date: " << endl;
+	cout << "Enter the Buy Date: " << endl;
 	cin >> p_Date;
 }

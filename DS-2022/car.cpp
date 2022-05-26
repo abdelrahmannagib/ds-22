@@ -19,11 +19,13 @@ car::car(string g)
 	cout << "Enter the year \n";
 	cin >> year;
 	edit_price();
+	appear = true;
+	belong = g;
 	fstream fcars;
 	fcars.open("cars.txt", ios::app);
 	fcars << id << " " << make << " " << model << " "<<install<<" "<<year<<" "<<price<<" "<<g << endl;
 }
-car::car(string ma, string mo, string ins, string ye, string pr)
+car::car(string ma, string mo, string ins, string ye, string pr,string g)
 {
 	id = counter;
 	counter++;
@@ -32,6 +34,8 @@ car::car(string ma, string mo, string ins, string ye, string pr)
 	install = ins;
 	year = ye;
 	price = pr;
+	appear = true;
+	belong = g;
 }
  void car::edit_price()
 {
