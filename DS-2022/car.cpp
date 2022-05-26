@@ -47,13 +47,13 @@ car::car(string ma, string mo, string ins, string ye, string pr)
  void car::Edit()
  {
 	 cout << "To edit price press 1, to edit install press 2 \n ";
-	 int x;
+	 string x;
 	 cin >> x;
-	 if (x == 1)
+	 if (x == "1")
 	 {
 		 edit_price();
 	 }
-	 else if (x == 2)
+	 else if (x == "2")
 	 {
 		 edit_install();
 	 }

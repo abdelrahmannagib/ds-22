@@ -87,42 +87,42 @@ void Showroom::ShowShowRoomData()
 
 void Showroom::EditCar(int num)
 {
-	int selector;
+	string selector;
 	while (true)
 	{
 		cout << "press 1 to edit model, 2 to edit make, 3 to edit price, 4 edit year, 5 to edit install, 6 to exit" << endl;
 		cin >> selector;
-		if (selector == 1)
+		if (selector == "1")
 		{
 			string NewModel;
 			cout << "enter  the new model :" << endl;
 			AvalibleCAr[num].model = NewModel;
 		}
-		else if (selector == 2)
+		else if (selector == "2")
 		{
 			string NewMake;
 			cout << "enter  the new Make :" << endl;
 			AvalibleCAr[num].make = NewMake;
 		}
-		else if (selector == 3)
+		else if (selector == "3")
 		{
 			string NewPrice;
 			cout << "enter  the new price :" << endl;
 			AvalibleCAr[num].price = NewPrice;
 		}
-		else if (selector == 4)
+		else if (selector == "4")
 		{
 			string NewYear;
 			cout << "enter  the new year :" << endl;
 			AvalibleCAr[num].year = NewYear;
 		}
-		else if (selector == 5)
+		else if (selector == "5")
 		{
 			string NewInstall;
 			cout << "enter  the new Install :" << endl;
 			AvalibleCAr[num].install = NewInstall;
 		}
-		else if (selector == 6)
+		else if (selector == "6")
 		{
 			break;
 		}

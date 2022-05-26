@@ -32,15 +32,15 @@ void service::Edit()
 {
 	while (true)
 	{
-		int y;
+		string y;
 		cout << "Press 1 to edit name ,2 to edit price or 3 to stop edit";
 		cin >> y;
-		if (y==1)
+		if (y=="1")
 		{
 			cout << "Enter the new name";
 			cin >> name;
 		}
-		else if (y == 2)
+		else if (y == "2")
 		{
 			cout << "Enter the new price";
 			cin >> price;

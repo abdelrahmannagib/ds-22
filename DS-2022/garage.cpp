@@ -52,29 +52,29 @@ void garage::edit_garage() {
 		cout << "press 3 to edit phone" << endl;
 		cout << "press 4 for services " << endl;
 		cout << "Press any button to stop";
-		int x;
+		string x;
 		cin >> x;
-		if (x == 1) {
+		if (x == "1") {
 			edit_name();
 		}
-		else if (x == 2) {
+		else if (x == "2") {
 			edit_location();
 		}
-		else if (x == 3)
+		else if (x == "3")
 		{
 			edit_phone();
 		}
-		else if (x == 4) {
+		else if (x == "4") {
 			cout << "Press 1 to add a service , 2 for edit a service , 3 to delete a service ";
-			int y;
+			string y;
 			cin >> y;
-			if (y == 1)
+			if (y == "1")
 			{
 				string g_id = to_string(id);
 				service s_new(g_id);
 				gar_services.push_back(s_new);
 			}
-			else if (y == 2)
+			else if (y == "2")
 			{
 				for (int i = 0; i < gar_services.size(); i++)
 				{
@@ -92,7 +92,7 @@ void garage::edit_garage() {
 					continue;
 				}
 			}
-			else if (y == 3)
+			else if (y == "3")
 			{
 				cout << "Enter the service you want to delete : ";
 				int hh;
