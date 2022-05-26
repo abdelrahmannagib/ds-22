@@ -6,12 +6,13 @@
 
 System::System() {
 	// insert showrooms
+	
 	insert_admins_from_files();
 	insert_customer_from_files();
 	insert_rooms_of_garage_to_file();
 	insert_garage_from_file();
 	 maptest();
-	 insert_cars_from_files();
+	// insert_cars_from_files();
 	 insert_services_from_files();
 	//cout<<sysRoom[0].Name;
 	// sysRoom[0].AddCar();
@@ -27,7 +28,7 @@ System::System() {
 		Showroom s;
 		sysRoom.push_back(s);
 	}
-	else if (n == 2)
+	else if (n == "2")
 	{
 		garage g;
 		sysGarage.push_back(g);
@@ -40,25 +41,29 @@ System::System() {
 	
 	/*sysRoom[0].AddCar();
 	 */
-	 
-	 int ad_or_cust;
+
+	 cout << "Gargee  " << sysGarage.size() << endl;
+	 string ad_or_cust;
 	 while (true)
 	 {
 
 
 		 cout << "Enter 1 for admin, 2 for customer, 3 to stop program " << endl;
 		 cin >> ad_or_cust;
-		 if (ad_or_cust == 1)
+		 if (ad_or_cust == "1")
 		 {
 			 goto_Admin();
 		 }
-		 else if (ad_or_cust == 2)
+		 else if (ad_or_cust == "2")
 		 {
 			 goto_customer();
 		 }
-		 else if (ad_or_cust == 3)
+		 else if (ad_or_cust == "3")
 		 {
 			 break;
+		 }
+		 else {
+			 cout << "enter a valid number please";
 		 }
 	 }
 
@@ -66,25 +71,25 @@ System::System() {
 void System::goto_customer()
 {
 	int n, num;
-	int choice;
-	int choose;
-	int choose2;
+	string new_choice;
+	string choice;
+	string choose;
+	string choose2;
 	string current_cust_id;
-
+	bool found_customer = false;
 	while (true)
 	{
-		bool found_customer = false;
 		string custmername;
-		cout << "press 1 for new customer or 2 for exist" << endl;
-		cin >> n;
-		if (n == 1)
+		cout << "press 1 for new customer , 2 for exist or 3 to exit " << endl;
+		cin >> new_choice;
+		if (new_choice == "1")
 		{
 			customer c;
 			current_cust_id = c.ID;
 			syscustomers.push_back(c);
 			found_customer = true;
 		}
-		else if (n == 2)
+		else if (new_choice == "2")
 		{
 			//check the name and pass
 			cout << "Enter your user name : ";
@@ -110,19 +115,24 @@ void System::goto_customer()
 				}
 			}
 		}
+		else if (new_choice == "3")
+		{
+			break;
+		}
 		else
 		{
-			cout << "Try to login again";
+			cout << "Try to login again"<<endl;
 		}
 		if (found_customer)
 			break;
 	}
 	/////////////////////////////////////////////////
 
-	while (true)
+	while (true&&found_customer)
 	{
-		int ch;
+
 		int resORbuy;
+		string ch;
 		cout << "-Press 1 to go to shoowroom" << endl;
 		cout << "-Press 2 to go to garage" << endl;
 		cout << "-Press 3 to search for a car" << endl;
@@ -131,7 +141,7 @@ void System::goto_customer()
 		cout << "-Press 6 to search for a garage" << endl;
 		cout << "-Press 7 to exit" << endl;
 		cin >> choice;
-		if (choice == 1)
+		if (choice == "1")
 		{
 			for (int i = 0; i < sysRoom.size(); i++)
 			{
@@ -154,11 +164,11 @@ void System::goto_customer()
 					int carId;
 					cout << "press 1 to buy or rent a car, 2 to see other rooms, 3 to show your reserved cars:" << endl;
 					cin >> choose;
-					if (choose == 1)
+					if (choose == "1")
 					{
 						cout << "press 1 to buy or reserve, 2 to rent,3 to exit: ";
 						cin >> ch;
-						if (ch == 1)
+						if (ch == "1")
 						{
 
 
@@ -195,7 +205,7 @@ void System::goto_customer()
 								cout << "Invalid, please enter a valid number." << endl;
 							}
 						}
-						else if (ch == 2)
+						else if (ch == "2")
 						{
 
 
@@ -214,7 +224,7 @@ void System::goto_customer()
 						}
 
 					}
-					else if (choose == 2)
+					else if (choose == "2")
 					{
 						break;
 					}
@@ -259,7 +269,7 @@ void System::goto_customer()
 			}
 			cout << "That's all cars we have" << endl;
 		}
-		else if (choice == 2)
+		else if (choice == "2")
 		{
 			for (int i = 0; i < sysGarage.size(); i++)
 			{
@@ -276,7 +286,7 @@ void System::goto_customer()
 					cout << "press 1 to choose service, 2 to see other garages, 3 to exit" << endl;
 
 					cin >> choose2;
-					if (choose2 == 1)
+					if (choose2 == "1")
 					{
 						if (sysGarage[i].gar_services.size() > 0) {
 							cout << "Enter number of choosen service: " << endl;
@@ -295,13 +305,16 @@ void System::goto_customer()
 
 
 						}
-						else if (choose2 == 2)
+						else if (choose2 == "2")
 						{
 							continue;
 						}
-						else if (choose2 == 3)
+						else if (choose2 == "3")
 						{
 							break;
+						}
+						else {
+							cout << "enter a valid number"<<endl;
 						}
 
 					}
@@ -309,23 +322,23 @@ void System::goto_customer()
 				cout << "That's all services we have" << endl;
 			}
 		}
-		else if (choice == 3)
+		else if (choice == "3")
 		{
 			search_car(current_cust_id);
 		}
-		else if (choice == 4)
+		else if (choice == "4")
 		{
 			SearchForService(current_cust_id);
 		}
-		else if (choice == 5)
+		else if (choice == "5")
 		{
 			search_Showrrom(current_cust_id);
 		}
-		else if (choice == 6)
+		else if (choice == "6")
 		{
 			SearchForGarage(current_cust_id);
 		}
-		else if (choice == 7)
+		else if (choice == "7")
 		{
 		cout << "-----------------------------" << endl;
 		cout << "History: " << endl;
@@ -337,7 +350,7 @@ void System::goto_customer()
 		}
 		else
 		{
-			cout << "Invalid number, please enter a valid number.";
+			cout <<  " enter a valid number."<<endl<<endl;
 		}
 		}
 	}
@@ -346,18 +359,20 @@ void System::goto_Admin() {
 	string user;
 	int x;
 	int input;
+	bool admin_found = false;
+
 	while (true)
 	{
-		cout << "New Admin press 1 or press 2 for old admin : \n ";
+		cout << "New Admin press 1 or press 2 for old admin or 3 to go back : \n ";
 		cin >> n;
 		if (n == 1) {
 			Admin A;
 			sysAdmin.push_back(A);
+			admin_found = true;
 			break;
 		}
 		else if (n == 2)
 		{
-			bool admin_found = false;
 			cout << "Enter your username : ";
 			cin >> user;
 			for (int i = 0; i < sysAdmin.size(); i++)
@@ -375,7 +390,7 @@ void System::goto_Admin() {
 					else
 					{
 						cout << "Wrong pass please try again" << endl;
-						i --;
+						i--;
 
 					}
 				}
@@ -383,18 +398,17 @@ void System::goto_Admin() {
 			if (admin_found)
 				break;
 		}
+		else if (n == 3)
+			break;
 
 	}
-	while (true)
-		{
+	while (true&&admin_found)
+	{
 			cout << "Welcome " << user << " press 1 for showrooms, 2 for garage, 3 to exit" << endl;
 			cin >> x;
 			if (x == 1)
-			{	
-				
-					
-
-					while (true)
+			{
+		    		while (true)
 					{
 						cout << "Press 1 to Add showroom, 2 to Edit, 3 to Delete, 4 to show a showroom, 5 to exit: ";
 						cin >> input;
@@ -420,7 +434,7 @@ void System::goto_Admin() {
 								cin >> number;
 								if (number == 1)
 								{
-									cout << "Which Room do you want to edit in?" << endl;
+									cout << "enter the numberof the room  you want to edit in?" << endl;
 									cin >> roomNo;
 									sysRoom[roomNo].EditShowRoom();
 
@@ -429,6 +443,8 @@ void System::goto_Admin() {
 								{
 									int RoomNo=0, CarNo=0;
 									cout << "enter showroom number and car number: " << endl;
+									
+									cin >> RoomNo >> CarNo;
 									sysRoom[RoomNo].EditCar(CarNo);
 								}
 								else if (number == 3)
@@ -449,6 +465,7 @@ void System::goto_Admin() {
 							int n2=0;
 							for (int i = 0; i < sysRoom.size(); i++)
 							{
+								cout <<"INDEX " << i << endl;
 								sysRoom[i].ShowShowRoomData();
 							}
 							while (true)
@@ -503,16 +520,8 @@ void System::goto_Admin() {
 			}
 			else if (x == 2)
 			{
-				int AccessGarage;
-				cout << "press(1) to show your garage : ";
-				cin >> AccessGarage;
-				if (AccessGarage == 1) {
-					goto_Garage();
-				}
-				else
-				{
-					cout << "ERROR!" << endl;
-				}
+				goto_Garage();
+			
 			}
 			else if (x == 3)
 			{
@@ -522,25 +531,25 @@ void System::goto_Admin() {
 			{
 				cout << "ERROR!" << endl;
 			}
-		}
+	}
 	
 }
-
-void System::goto_Garage() {
-	bool garage_flag=true;
-	while (garage_flag == true)
+void System::goto_Garage()
+{
+	while (true)
 	{
 		cout << "enter 1 to add garage" << endl;
 		cout << "enter 2 to edit garage" << endl;
 		cout << "enter 3 to delete garage" << endl;
 		cout << "enter 4 if you want to exit";
-		int y;
+		string y;
 		cin >> y;
-		if (y == 1) {
+		if (y == "1") {
 			garage g;
 			sysGarage.push_back(g);
 		}
-		else if (y == 2) {
+		else if (y == "2")
+		{
 			for (int i = 0; i < sysGarage.size(); i++)
 			{
 				char choice;
@@ -555,54 +564,53 @@ void System::goto_Garage() {
 				{
 					sysGarage[i].edit_garage();
 				}
+				else
+				{
+					continue;
+				}
 			}
 		}
-		else if (y == 3)
+		else if (y == "3")
 		{
 			cout << "Enter a number between 0 and " << sysGarage.size() - 1 << endl;
 			int del_garage;
 			cin >> del_garage;
-			if (y >= 0 && y < sysGarage.size())
+			while (del_garage < 0 && del_garage >= sysGarage.size())
 			{
-				// 				sysRoom[i].AvalibleCAr.erase(sysRoom[i].AvalibleCAr.begin(), sysRoom[i].AvalibleCAr.begin() + n);
-				sysGarage.erase(sysGarage.begin(), sysGarage.begin() + del_garage);
+				cout << "Wrong input try again: ";
+				cin >> del_garage;
 			}
-			else
-			{
-				cout << "Try again";
-				continue;
-			}
-		}
-		else if (y== 4)
-		{
-			garage_flag = false;
-		}
-		else {
-			cout << "enter correct number";
-		}
+			sysGarage.erase(sysGarage.begin(), sysGarage.begin() + del_garage);
 
+		}
+		else
+		{
+			break;
+		}
 	}
 }
-// from file to vector of rooms
 void System::insert_rooms_of_garage_to_file() {
 
 	fstream sroom;
-	char room_id[70];
+	/*char room_id[70];
 	char name[70];
 	char location[70];
 	char phone[70];
+	*/
+	string name, room_id, location, phone;
 	sroom.open("showroom.txt", ios::in);
 	while (!sroom.eof()) {
-		sroom.getline(room_id, 70, ' ');
+		/*sroom.getline(room_id, 70, ' ');
 		sroom.getline(name, 70, ' ');
 		sroom.getline(location, 70, ' ');
 		sroom.getline(phone, 70, ' ');
+		*/
+		sroom >> room_id >> name >> location >> phone;
 		Showroom sss(name,location,phone);
 		sysRoom.push_back(sss);
-		
 	}
+	sysRoom.pop_back();
 }
-
 void System::insert_garage_from_file()
 {
 	fstream garagee;
@@ -621,8 +629,8 @@ void System::insert_garage_from_file()
 		garage gg(name, location, phone_number);
 		sysGarage.push_back(gg);
 	}
+	sysGarage.pop_back();
 }
-
 void System::insert_admins_from_files()
 {
 	fstream fadmin;
@@ -946,3 +954,4 @@ void System::sellOrCancel(string rId, int cId, int BuyorCancel)
 
 
 
+}
