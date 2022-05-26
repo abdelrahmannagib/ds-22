@@ -30,7 +30,6 @@ public:
 	map<string, pair<bool,int> >Showroom_search;
 	map<string, bool> car_found;
 	map<string, pair<int, int>> car_room_ids;
-
 	System();
 	void goto_customer();
 	void goto_Admin();
