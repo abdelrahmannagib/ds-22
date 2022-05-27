@@ -69,12 +69,13 @@ void Showroom::EditShowRoom() {
 
 void Showroom::ShowShowRoomData()
 {
-	cout << "Room:" << ID << endl;
+	cout << "======== Showroom Info ========" << endl;
 	cout << "Name:" << Name << endl;
+	cout << "Room:" << ID << endl;	
 	cout << "Location: " << Location << endl;
 	cout << "Phone: " << Phone << endl;
 
-	cout << "Cars Available in Room: " << endl;
+	cout << "======== Cars Available in Room ========" << endl;
 	for (int i = 0; i < AvalibleCAr.size(); i++)
 	{
 		cout << "Car number: " << i << endl;
