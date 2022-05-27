@@ -54,6 +54,8 @@ void service::Edit()
 
 void service::ShowServiceData()
 {
-	cout << "Service's Name  |  Service's Price" << endl;
-	cout << name << "  |  " << price << endl;
+	cout << "======== Services ========" << endl;
+	cout << "Service's Name: "<< name << endl;
+	cout << "Service's Price: " << price << endl;
+	
 }
