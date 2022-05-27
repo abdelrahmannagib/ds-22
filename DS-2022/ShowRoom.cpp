@@ -44,7 +44,6 @@ void Showroom::AddCar() {
 	 car c(s_id);
 	 AvalibleCAr.push_back(c);
 }
-
 void Showroom::EditShowRoom() {
 	int in;
 	while (true)
@@ -66,7 +65,6 @@ void Showroom::EditShowRoom() {
 			cout << "Invalid number, please enter a valid number" << endl;
 	}
 }
-
 void Showroom::ShowShowRoomData()
 {
 	cout << "Room:" << ID << endl;
@@ -86,7 +84,6 @@ void Showroom::ShowShowRoomData()
 		cout << "Install: " << AvalibleCAr[i].install << endl;
 	}
 }
-
 void Showroom::EditCar(int num)
 {
 	int selector;
