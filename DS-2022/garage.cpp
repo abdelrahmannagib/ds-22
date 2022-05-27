@@ -61,7 +61,8 @@ void garage::showGarageData()
 	
 }
 void garage::edit_garage() {
-	while (true)
+	bool edittt = true;
+	while (edittt)
 	{
 		cout << "press 1 to edit name" << endl;
 		cout << "press 2 to edit location" << endl;
@@ -126,6 +127,7 @@ void garage::edit_garage() {
 		else if (x == 5)
 		{
 			break;
+
 		}
 		else 
 		{

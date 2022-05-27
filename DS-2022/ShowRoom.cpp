@@ -49,7 +49,7 @@ void Showroom::EditShowRoom() {
 	int in;
 	while (true)
 	{
-		cout << "Press 1 to Edit Name, 2 to Edit Location, 3 to Edit Phone, 4 to Exit: ";
+		cout << "Press 1 to Edit Name, 2 to Edit Location, 3 to Edit Phone, 4 to add car ,5 to Exit: ";
 		cin >> in;
 
 		if (in == 1)
@@ -59,6 +59,8 @@ void Showroom::EditShowRoom() {
 		else if (in == 3)
 			UpdateRoomPhone();
 		else if (in == 4)
+			AddCar();
+		else if (in == 5)
 			break;
 		else
 			cout << "Invalid number, please enter a valid number" << endl;
