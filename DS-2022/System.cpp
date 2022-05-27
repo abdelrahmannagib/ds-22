@@ -3,10 +3,6 @@
 #include<string>
 #include<utility>
 
-
-
-
-
 System::System() {
 	// insert showrooms
 	
@@ -14,8 +10,8 @@ System::System() {
 	insert_customer_from_files();
 	insert_rooms_of_garage_to_file();
 	insert_garage_from_file();
-	 maptest();
-	// insert_cars_from_files();
+     maptest();
+	 insert_cars_from_files();
 	 insert_services_from_files();
 	//cout<<sysRoom[0].Name;
 	// sysRoom[0].AddCar();
@@ -45,7 +41,7 @@ System::System() {
 	/*sysRoom[0].AddCar();
 	 */
 
-	 cout << "Gargee  " << sysGarage.size() << endl;
+	// cout << "Gargee  " << sysGarage.size() << endl;
 	 string ad_or_cust;
 	 while (true)
 	 {
@@ -210,8 +206,6 @@ void System::goto_customer()
 						}
 						else if (ch == "2")
 						{
-
-
 							cout << "Enter number of choosen car: " << endl;
 							cin >> num;
 							string carInstall = sysRoom[i].AvalibleCAr[num].install;
@@ -222,7 +216,7 @@ void System::goto_customer()
 							history_cust[current_cust_id].push_back(serProcess);
 							break;
 						}
-						else if (ch == 3)
+						else if (ch == "3")
 						{
 							break;
 						}
@@ -232,7 +226,7 @@ void System::goto_customer()
 					{
 						break;
 					}
-					else if (choose == 3)
+					else if (choose == "3")
 					{
 						for (int i = 0; i < reservedCar[current_cust_id].size(); i++)
 						{
@@ -395,7 +389,7 @@ void System::goto_customer()
 	}
 }
 void System::goto_Admin() {
-	int n;
+	string n;
 	string user;
 	int x;
 	int input;
@@ -405,13 +399,13 @@ void System::goto_Admin() {
 	{
 		cout << "New Admin press 1 or press 2 for old admin or 3 to go back : \n ";
 		cin >> n;
-		if (n == 1) {
+		if (n == "1") {
 			Admin A;
 			sysAdmin.push_back(A);
 			admin_found = true;
 			break;
 		}
-		else if (n == 2)
+		else if (n == "2")
 		{
 			cout << "Enter your username : ";
 			cin >> user;
@@ -438,7 +432,7 @@ void System::goto_Admin() {
 			if (admin_found)
 				break;
 		}
-		else if (n == 3)
+		else if (n == "3")
 			break;
 
 	}
@@ -906,6 +900,7 @@ void System::SearchForService(string customerId)
 		}
 		else
 		{
+
 			cout << "Invalid, please enter a valid number." << endl;
 		}
 
@@ -1222,7 +1217,6 @@ void System::search_car(string customerId)
 		}
 	}
 }
-
 void System::reserveCar(string customerId, car c)
 {
 	
@@ -1230,7 +1224,6 @@ void System::reserveCar(string customerId, car c)
 
 
 }
-
 void System::sellOrCancel(string rId, int cId, int BuyorCancel)
 {
 	int x = map_rooms[rId];
@@ -1247,8 +1240,4 @@ void System::sellOrCancel(string rId, int cId, int BuyorCancel)
 		sysRoom[x].AvalibleCAr.erase(sysRoom[x].AvalibleCAr.begin(), sysRoom[x].AvalibleCAr.begin() + carIndex);
 	else
 		sysRoom[x].AvalibleCAr[carIndex].appear = true;
-}
-
-
-
 }
