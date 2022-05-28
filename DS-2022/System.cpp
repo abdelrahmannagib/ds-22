@@ -757,32 +757,6 @@ void System::insert_customer_from_files()
 		syscustomers.push_back(cust);
 	}
 }
-void System::insert_process_from_file()
-{
-	fstream fprocess;
-	char fprocess_id[70];
-	char fcar_id[70];
-	char fdate[70];
-	char fmoney[70];
-	char fchosen_service[70];
-	fprocess.open("process.txt", ios::in);
-	while (!fprocess.eof())
-	{
-
-		fprocess.getline(fprocess_id, 70, ' ');
-		fprocess.getline(fcar_id, 70, ' ');
-		fprocess.getline(fdate, 70, ' ');
-		fprocess.getline(fmoney, 70, ' ');
-		fprocess.getline(fchosen_service, 70);
-
-
-
-
-	}
-
-
-
-}
 void System::maptest()
 {
 	for (int i = 0; i < sysRoom.size(); i++)
@@ -1218,10 +1192,7 @@ void System::search_car(string customerId)
 }
 void System::reserveCar(string customerId, car c)
 {
-	
 	reservedCar[customerId].push_back(c);
-
-
 }
 void System::sellOrCancel(string rId, int cId, int BuyorCancel)
 {
